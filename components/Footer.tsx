@@ -10,31 +10,24 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#0b1120] border-t border-[#1e293b] py-14 px-4 sm:px-6 lg:px-8 font-mono text-xs text-slate-300 transition-colors duration-300">
+    <footer className="bg-[#0a0d12] border-t border-[#171d27] py-12 px-4 sm:px-6 lg:px-8 font-tech text-xs text-slate-400">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-        {/* Left: Identity & Status */}
-        <div className="flex flex-col items-center md:items-start gap-1.5 text-center md:text-left">
-          <div className="flex items-center gap-2 text-white font-bold">
-            <TerminalIcon size={15} className="text-cyan-400" />
-            <span>{personalInfo.name}</span>
-            <span className="text-slate-500">|</span>
-            <span className="text-cyan-400 text-xs font-semibold">{personalInfo.callsign}</span>
+        {/* Left: Identity */}
+        <div className="flex flex-col items-center md:items-start gap-1 text-center md:text-left">
+          <div className="flex items-center gap-2 text-white font-medium">
+            <TerminalIcon size={14} className="text-cyan-400" />
+            <span className="tracking-wider uppercase">{personalInfo.name}</span>
+            <span className="text-slate-600">/</span>
+            <span className="text-cyan-400 text-xs">PORTFOLIO</span>
           </div>
-          <p className="text-xs text-slate-400 font-sans">
+          <p className="text-xs text-slate-500 font-body">
             {personalInfo.primaryTitle} • {personalInfo.college}
           </p>
         </div>
 
-        {/* Center: Real-time telemetry / build status */}
-        <div className="flex items-center gap-3 text-xs text-slate-400">
-          <span className="flex items-center gap-1.5 text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 led-pulse" />
-            SYS_TELEMETRY: STABLE
-          </span>
-          <span className="text-slate-600">•</span>
-          <span>NO_TRACKERS</span>
-          <span className="text-slate-600">•</span>
-          <span className="text-cyan-400 font-semibold">LATENCY: &lt;10ms</span>
+        {/* Center: Engineering Focus */}
+        <div className="text-center text-xs text-slate-500 hidden sm:block">
+          <span>HARDWARE–SOFTWARE INTEGRATION • REAL-TIME SYSTEMS • RTL DESIGN</span>
         </div>
 
         {/* Right: Actions & Return to Top */}
@@ -43,25 +36,25 @@ export default function Footer() {
             href={personalInfo.socials.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-lg bg-[#162238] border border-[#243552] text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 transition-colors"
+            className="p-2.5 rounded-lg bg-[#10151d] border border-[#171d27] text-slate-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-colors"
             title="GitHub"
             aria-label="GitHub"
           >
-            <GitHubIcon size={16} />
+            <GitHubIcon size={15} />
           </a>
           <a
             href={personalInfo.socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="p-2.5 rounded-lg bg-[#162238] border border-[#243552] text-slate-200 hover:text-cyan-300 hover:border-cyan-400/50 transition-colors"
+            className="p-2.5 rounded-lg bg-[#10151d] border border-[#171d27] text-slate-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-colors"
             title="LinkedIn"
             aria-label="LinkedIn"
           >
-            <LinkedInIcon size={16} />
+            <LinkedInIcon size={15} />
           </a>
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#162238] border border-[#243552] hover:border-cyan-400/60 text-slate-200 hover:text-cyan-300 transition-colors text-xs font-semibold"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#10151d] border border-[#171d27] hover:border-cyan-400/50 text-slate-300 hover:text-cyan-300 transition-colors text-xs"
             aria-label="Return to top of page"
           >
             <span className="rotate-180 inline-block">
@@ -72,12 +65,12 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-[#1e293b] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
+      <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-[#171d27] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
         <div>
-          © {new Date().getFullYear()} Abhishek Ahirrao. Designed with embedded engineering principles.
+          © {new Date().getFullYear()} Abhishek Ahirrao. All rights reserved.
         </div>
-        <div>
-          Hardware–Software Integration • Real-Time Systems • FPGA RTL
+        <div className="text-slate-600">
+          Built with Next.js, React, Tailwind CSS & GSAP ScrollTrigger
         </div>
       </div>
     </footer>

@@ -2,10 +2,10 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
-import SkillsSection from "@/components/SkillsSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
-import OtherProjects from "@/components/OtherProjects";
 import ExperienceSection from "@/components/ExperienceSection";
+import EducationSection from "@/components/EducationSection";
+import SkillsSection from "@/components/SkillsSection";
 import AchievementsSection from "@/components/AchievementsSection";
 import PublicationsSection from "@/components/PublicationsSection";
 import CertificationsSection from "@/components/CertificationsSection";
@@ -15,47 +15,47 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-[#0b1120] text-[#f8fafc]">
+    <div className="flex flex-col min-h-screen bg-[#0a0d12] text-[#f8fafc]">
       {/* Sticky Top Navigation */}
       <Navbar />
 
       {/* Main Content Sections */}
       <main className="flex-1 w-full">
-        {/* Hero with interactive hardware-to-system data flow */}
+        {/* Hero with authentic engineering typography & real portrait */}
         <Hero />
 
-        {/* Identity, Background & Academic Credentials */}
+        {/* Narrative & 3 Engineering Pillars */}
         <AboutSection />
 
-        {/* Primary Technical Identity (Organized into 6 discrete categories) */}
-        <SkillsSection />
-
-        {/* Featured Projects (Prominent V2V Autonomous Control, FPGA Engine, Smart Home) */}
+        {/* Featured Projects: Horizontal Pinned Hanging Rail (5 Flagship Projects) */}
         <FeaturedProjects />
 
-        {/* Other Technical Projects (TwinX, GaganiX, Water Rocket Parametric Optimization) */}
-        <OtherProjects />
-
-        {/* Practical Experience & Internships (Bharat Space Education & Team Antariiksh) */}
+        {/* Experience: Horizontal Pinned Hanging Rail (Milestones) */}
         <ExperienceSection />
 
-        {/* Honors & Major Hackathon Wins (SIH 2025 National Winner & Unplugged 1st Prize) */}
+        {/* Education: Vertical Hanging Milestone Spine with Campus Asset */}
+        <EducationSection />
+
+        {/* Technical Competencies Matrix */}
+        <SkillsSection />
+
+        {/* Major Achievements & Competition Wins */}
         <AchievementsSection />
 
-        {/* Scholarly Publications (IJETED & ICITSC 2025) */}
+        {/* Scholarly Publications */}
         <PublicationsSection />
 
-        {/* Continuous Learning & Certifications (Completed vs Ongoing) */}
+        {/* Continuous Learning & Professional Certifications */}
         <CertificationsSection />
 
-        {/* Leadership & Activities (Team Antariiksh, T&P, Techfest) */}
+        {/* Leadership & Activities */}
         <LeadershipSection />
 
-        {/* Direct Communication Channels */}
+        {/* Direct Contact & Collaboration */}
         <ContactSection />
       </main>
 
-      {/* Engineering Footer */}
+      {/* Engineering Colophon & Footer */}
       <Footer />
     </div>
   );

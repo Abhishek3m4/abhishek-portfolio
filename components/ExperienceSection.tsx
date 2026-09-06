@@ -1,222 +1,216 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { engineeringExperiences } from "@/data/portfolioData";
-import {
-  CircuitIcon,
-  CheckCircleIcon,
-  ClockIcon,
-  TerminalIcon,
-  CpuIcon,
-  WaveformIcon,
-  ChevronRightIcon,
-  ChevronLeftIcon,
-} from "@/components/icons";
+import TechnicalImage from "@/components/TechnicalImage";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export default function ExperienceSection() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const activeExp = engineeringExperiences[activeIndex];
-  const total = engineeringExperiences.length;
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isDesktop = window.innerWidth >= 768;
+
+    if (!isDesktop || prefersReducedMotion) {
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      const track = trackRef.current;
+      const section = sectionRef.current;
+      if (!track || !section) return;
+
+      const getScrollAmount = () => {
+        return track.scrollWidth - window.innerWidth + 140;
+      };
+
+      const tween = gsap.to(track, {
+        x: () => -getScrollAmount(),
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          pin: true,
+          scrub: 0.8,
+          start: "top top",
+          end: () => `+=${getScrollAmount() * 1.3}`,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const idx = Math.min(
+              Math.floor(self.progress * engineeringExperiences.length),
+              engineeringExperiences.length - 1
+            );
+            setActiveIndex(idx);
+          },
+        },
+      });
+
+      return () => {
+        tween.kill();
+      };
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
       id="experience"
-      className="py-24 px-4 sm:px-6 lg:px-8 bg-[#0f172a] border-b border-[#1e293b] transition-colors duration-300"
+      ref={sectionRef}
+      className="relative bg-[#0a0d12] border-b border-[#242e3d] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
-        {/* Section Header */}
-        <div className="mb-12">
-          <div className="flex items-center gap-2 font-mono text-xs text-cyan-400 tracking-wider mb-2.5">
-            <span>// 05</span>
-            <span className="w-8 h-[1px] bg-cyan-500/50" />
-            <span>RESEARCH & ENGINEERING EXPERIENCE</span>
+      <div className="w-full min-h-screen flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-6 lg:px-12">
+        {/* Top Header */}
+        <div className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#242e3d] z-20">
+          <div>
+            <div className="flex items-center gap-2 font-tech text-xs text-cyan-400 tracking-widest uppercase mb-1">
+              <span>CAREER // AEROSPACE & FIRMWARE</span>
+            </div>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
+              Engineering Experience
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Practical Engineering & Internship History
-          </h2>
-          <p className="mt-2 text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed">
-            Aerospace simulation research and hands-on avionics subsystem engineering with strictly verified roles and responsibilities.
-          </p>
+
+          <div className="font-tech text-xs text-slate-400">
+            CHRONOLOGICAL TIMELINE // 2025 ➔ PRESENT
+          </div>
         </div>
 
-        {/* Interactive Timeline Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Interactive Timeline Milestones */}
-          <div className="lg:col-span-4 space-y-4">
-            <div className="text-xs font-mono text-slate-400 tracking-wider mb-2">
-              TIMELINE TRACK // SELECT MILESTONE
+        {/* Physical Hanging Rail System */}
+        <div className="flex-1 flex flex-col justify-center w-full py-6 sm:py-10 relative">
+          {/* Continuous Horizontal Hanging Rail (Desktop) */}
+          <div className="hidden md:block absolute top-16 left-0 right-0 z-10 pointer-events-none">
+            <div className="w-full h-[2px] bg-[#242e3d] relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             </div>
+          </div>
 
-            <div className="relative border-l-2 border-[#243552] ml-4 pl-6 space-y-6">
+          {/* Moving Track */}
+          <div className="w-full overflow-x-auto md:overflow-visible no-scrollbar">
+            <div
+              ref={trackRef}
+              className="flex gap-8 lg:gap-12 md:pl-6 md:pr-24 will-change-transform items-start"
+            >
               {engineeringExperiences.map((exp, idx) => {
-                const isActive = idx === activeIndex;
-                return (
-                  <div key={exp.organization} className="relative">
-                    {/* Timeline Node Point */}
-                    <button
-                      onClick={() => setActiveIndex(idx)}
-                      className={`absolute -left-[31px] top-1.5 w-4 h-4 rounded-full border-2 transition-all duration-200 flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-                        isActive
-                          ? "bg-cyan-400 border-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.8)] scale-110"
-                          : "bg-[#0b1120] border-[#334155] hover:border-cyan-400"
-                      }`}
-                      aria-label={`View experience at ${exp.organization}`}
-                      aria-pressed={isActive}
-                    />
+                const isCurrent = idx === activeIndex;
+                const offsetClass = idx % 2 === 0 ? "md:pt-14" : "md:pt-20";
 
-                    {/* Timeline Milestone Button Card */}
-                    <button
-                      onClick={() => setActiveIndex(idx)}
-                      className={`w-full text-left p-4 rounded-xl border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-                        isActive
-                          ? "bg-[#162238] border-cyan-400/80 shadow-lg shadow-cyan-950/40 translate-x-1"
-                          : "bg-[#111c30] border-[#243552] hover:border-[#38bdf8]/40 hover:bg-[#14223a] text-slate-300"
-                      }`}
-                    >
-                      <div className="flex items-center justify-between text-[11px] font-mono mb-1.5">
-                        <span className={isActive ? "text-cyan-400 font-bold" : "text-slate-400"}>
-                          0{idx + 1} // {exp.date || "ONGOING"}
+                return (
+                  <div
+                    key={exp.organization}
+                    className={`shrink-0 w-[88vw] sm:w-[75vw] md:w-[60vw] lg:w-[48vw] xl:w-[42vw] flex flex-col items-center ${offsetClass}`}
+                  >
+                    {/* Hanging Node, Year Chip & Stem (Desktop) */}
+                    <div className="hidden md:flex flex-col items-center mb-0 relative z-20">
+                      {/* Node connected to top rail */}
+                      <div
+                        className="w-4 h-4 rounded-full border-2 transition-colors flex items-center justify-center bg-[#0a0d12]"
+                        style={{
+                          borderColor: isCurrent ? "#00f0ff" : "#3b495e",
+                        }}
+                      >
+                        <div
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{
+                            backgroundColor: isCurrent ? "#00f0ff" : "#3b495e",
+                          }}
+                        />
+                      </div>
+
+                      {/* Hanging Stem with Year Marker */}
+                      <div className="flex flex-col items-center">
+                        <div
+                          className="w-[2px] h-3 transition-colors"
+                          style={{ backgroundColor: isCurrent ? "#00f0ff" : "#242e3d" }}
+                        />
+                        <span
+                          className="font-tech text-xs font-bold px-2.5 py-0.5 rounded border bg-[#171d27] my-0.5"
+                          style={{
+                            color: isCurrent ? "#00f0ff" : "#cbd5e1",
+                            borderColor: isCurrent ? "#00f0ff" : "#242e3d",
+                          }}
+                        >
+                          {exp.year}
                         </span>
-                        {isActive && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 led-pulse" />
-                        )}
+                        <div
+                          className="w-[2px] h-4 transition-colors"
+                          style={{ backgroundColor: isCurrent ? "#00f0ff" : "#242e3d" }}
+                        />
                       </div>
-                      <div className="font-bold text-sm sm:text-base text-white leading-snug">
-                        {exp.organization}
+                    </div>
+
+                    {/* Suspended Hanging Experience Card */}
+                    <div
+                      className="w-full rounded-2xl bg-[#171d27] border p-6 sm:p-8 shadow-2xl transition-all duration-300 relative group"
+                      style={{
+                        borderColor: isCurrent ? "#00f0ff80" : "#242e3d",
+                      }}
+                    >
+                      {/* Header */}
+                      <div className="flex items-start justify-between border-b border-[#242e3d] pb-4 mb-5">
+                        <div>
+                          <span className="font-tech text-xs text-cyan-400 block font-semibold mb-1">
+                            {exp.period}
+                          </span>
+                          <h3 className="font-display text-2xl sm:text-3xl font-bold text-white uppercase tracking-tight">
+                            {exp.organization}
+                          </h3>
+                        </div>
+
+                        <span className="font-tech text-xs px-2.5 py-1 rounded bg-[#10151d] text-slate-300 border border-[#242e3d] shrink-0">
+                          {exp.role}
+                        </span>
                       </div>
-                      <div className="text-xs text-slate-300 font-mono mt-1">
-                        {exp.role}
+
+                      {/* Concise Description */}
+                      <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-body mb-5">
+                        {exp.description}
+                      </p>
+
+                      {/* Facility / Artifact Image (if present) */}
+                      {exp.image && (
+                        <div className="mb-5 rounded-xl overflow-hidden border border-[#242e3d] bg-[#0a0d12] p-1.5 shadow-inner">
+                          <TechnicalImage
+                            src={exp.image}
+                            alt={exp.organization}
+                            aspectRatio="aspect-16/9"
+                            label={`EXPERIENCE // ${exp.year}`}
+                            tag="AVIONICS"
+                          />
+                        </div>
+                      )}
+
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-2 pt-2 border-t border-[#242e3d]/80">
+                        {exp.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2.5 py-1 rounded bg-[#10151d] border border-[#242e3d] font-tech text-xs text-slate-300"
+                          >
+                            {tech}
+                          </span>
+                        ))}
                       </div>
-                    </button>
+                    </div>
                   </div>
                 );
               })}
             </div>
-
-            {/* Stepper Navigation Buttons */}
-            <div className="pt-2 flex items-center justify-between font-mono text-xs text-slate-400">
-              <button
-                onClick={() => setActiveIndex((prev) => (prev - 1 + total) % total)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#162238] border border-[#243552] hover:border-cyan-400 text-slate-200 hover:text-cyan-300 transition-colors"
-                aria-label="Previous experience"
-              >
-                <ChevronLeftIcon size={14} />
-                <span>Prev Record</span>
-              </button>
-              <span>{activeIndex + 1} / {total}</span>
-              <button
-                onClick={() => setActiveIndex((prev) => (prev + 1) % total)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#162238] border border-[#243552] hover:border-cyan-400 text-slate-200 hover:text-cyan-300 transition-colors"
-                aria-label="Next experience"
-              >
-                <span>Next Record</span>
-                <ChevronRightIcon size={14} />
-              </button>
-            </div>
           </div>
+        </div>
 
-          {/* Right Column: Active Experience Detail Dossier */}
-          <div className="lg:col-span-8">
-            <div
-              key={activeExp.organization}
-              className="rounded-2xl bg-[#162238] border border-[#243552] p-6 sm:p-8 lg:p-10 shadow-xl transition-all duration-300 space-y-6"
-            >
-              {/* Dossier Header */}
-              <div className="flex flex-wrap items-start justify-between gap-4 border-b border-[#243552] pb-5">
-                <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-xs font-mono text-cyan-400 font-bold tracking-wider">
-                      ACTIVE DOSSIER // 0{activeIndex + 1}
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 led-pulse" />
-                  </div>
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                    {activeExp.organization}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-2 text-xs sm:text-sm font-mono text-slate-300 mt-2">
-                    <span className="text-cyan-300 font-semibold">{activeExp.role}</span>
-                    {activeExp.position && (
-                      <>
-                        <span className="text-slate-500">•</span>
-                        <span className="text-slate-300">{activeExp.position}</span>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {activeExp.date && (
-                  <div className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#0f172a] border border-[#2e4366] text-xs font-mono text-slate-200">
-                    <ClockIcon size={13} className="text-cyan-400" />
-                    <span>{activeExp.date}</span>
-                  </div>
-                )}
-              </div>
-
-              {/* Research Project Badge if exists */}
-              {activeExp.project && (
-                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-[#0f172a] border border-cyan-500/40 text-xs font-mono text-cyan-200">
-                  <TerminalIcon size={14} className="text-cyan-400 shrink-0" />
-                  <span>PROJECT: {activeExp.project}</span>
-                </div>
-              )}
-
-              {/* Description */}
-              {activeExp.description && (
-                <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans">
-                  {activeExp.description}
-                </p>
-              )}
-
-              {/* Tools & Environments */}
-              {activeExp.tools && (
-                <div>
-                  <div className="text-xs font-mono text-slate-400 mb-2.5 flex items-center gap-1.5">
-                    <CpuIcon size={14} className="text-cyan-400" />
-                    <span>ENGINEERING TOOLS & ENVIRONMENTS</span>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {activeExp.tools.map((tool) => (
-                      <span
-                        key={tool}
-                        className="px-3 py-1 rounded-md bg-[#0f172a] border border-[#2e4366] text-cyan-200 font-mono text-xs"
-                      >
-                        {tool}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Work Scope / Bullets */}
-              <div>
-                <div className="text-xs font-mono text-slate-300 mb-3 flex items-center gap-1.5">
-                  <CircuitIcon size={14} className="text-teal-400" />
-                  <span>KEY RESPONSIBILITIES & SYSTEM WORK</span>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {activeExp.work.map((item) => (
-                    <div
-                      key={item}
-                      className="p-3 rounded-lg bg-[#0f172a] border border-[#243552] text-xs sm:text-sm text-slate-200 font-mono flex items-start gap-2.5 hover:border-cyan-500/40 transition-colors"
-                    >
-                      <CheckCircleIcon size={15} className="text-teal-400 shrink-0 mt-0.5" />
-                      <span className="leading-snug">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Status footer strip */}
-              <div className="pt-3 border-t border-[#243552] flex items-center justify-between text-xs font-mono text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <WaveformIcon size={13} className="text-cyan-400" />
-                  CONFIRMED ENGINEERING HISTORY
-                </span>
-                <span className="text-emerald-400">VERIFIED CREDENTIAL</span>
-              </div>
-            </div>
-          </div>
+        {/* Bottom Hint */}
+        <div className="hidden md:flex items-center justify-between font-tech text-[11px] text-slate-400 pt-3 border-t border-[#242e3d]/60">
+          <span>VERTICAL SCROLL CONTROLS HORIZONTAL TIMELINE</span>
+          <span>AEROSPACE & FIRMWARE MILESTONES</span>
         </div>
       </div>
     </section>

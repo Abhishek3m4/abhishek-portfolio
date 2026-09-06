@@ -1,26 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0b1120;
-  --background-alt: #0f172a;
-  --background-card: #162238;
-  --background-card-hover: #1c2b45;
-  --foreground: #f8fafc;
-  --foreground-muted: #cbd5e1;
-  --foreground-dim: #94a3b8;
-  --border-subtle: #243552;
-  --border-focus: #38bdf8;
-  --accent-cyan: #22d3ee;
+  --bg-page: #0a0d12;
+  --bg-section: #10151d;
+  --bg-card: #171d27;
+  --bg-elevated: #202833;
+  --text-primary: #f2f4f7;
+  --text-secondary: #a7b0bc;
+  --text-muted: #6c7889;
+  --border-subtle: #242e3d;
+  --border-active: #3b495e;
+  --accent-cyan: #00f0ff;
   --accent-teal: #14b8a6;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
+  --accent-coral: #ff6b6b;
+  --accent-violet: #a855f7;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--bg-page);
+  --color-foreground: var(--text-primary);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+  --font-tech: var(--font-tech);
+  --font-mono: var(--font-tech);
 }
 
 html {
@@ -29,179 +34,107 @@ html {
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
-  selection-background-color: #0e7490;
+  selection-background-color: #164e63;
   selection-color: #ffffff;
 }
 
-/* Subtle Engineering Grid Background - Softer and less tiring */
-.bg-circuit-grid {
-  background-size: 40px 40px;
+/* Typography Utility Classes */
+.font-display {
+  font-family: var(--font-display), sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.font-body {
+  font-family: var(--font-body), sans-serif;
+}
+
+.font-tech {
+  font-family: var(--font-tech), monospace;
+}
+
+/* Subtle Structural CAD Grid */
+.bg-cad-grid {
+  background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
-.bg-dot-grid {
-  background-size: 24px 24px;
-  background-image: radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+/* Hanging-Rail Visual Elements */
+.hanging-rail-line {
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(59, 73, 94, 0.2),
+    rgba(59, 73, 94, 0.9) 15%,
+    rgba(59, 73, 94, 0.9) 85%,
+    rgba(59, 73, 94, 0.2)
+  );
 }
 
-/* Soft Dark Engineering Card System */
-.tech-card {
-  background-color: rgba(22, 34, 56, 0.85);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(56, 189, 248, 0.15);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+.hanging-stem-line {
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(59, 73, 94, 0.9),
+    rgba(59, 73, 94, 0.4)
+  );
 }
 
-.tech-card:hover {
-  background-color: rgba(28, 43, 69, 0.95);
-  border-color: rgba(56, 189, 248, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(2, 6, 23, 0.5), 0 0 15px -3px rgba(34, 211, 238, 0.1);
-}
-
-/* Restrained LED pulse */
-@keyframes pulseGlow {
+/* Restrained LED indicator */
+@keyframes pulseSubtle {
   0%, 100% {
     opacity: 1;
-    transform: scale(1);
   }
   50% {
-    opacity: 0.5;
-    transform: scale(0.9);
+    opacity: 0.4;
   }
 }
 
 .led-pulse {
-  animation: pulseGlow 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulseSubtle 3s ease-in-out infinite;
 }
 
-/* Signal bus dash animation */
-@keyframes busFlow {
-  0% {
-    stroke-dashoffset: 24;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-}
-
-.animate-bus-flow {
-  stroke-dasharray: 6 6;
-  animation: busFlow 1.2s linear infinite;
-}
-
-/* Staged Hero Entrance Keyframes */
-@keyframes heroEntrance {
-  0% {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.hero-enter-1 {
-  animation: heroEntrance 0.5s ease-out 0.05s both;
-}
-
-.hero-enter-2 {
-  animation: heroEntrance 0.5s ease-out 0.15s both;
-}
-
-.hero-enter-3 {
-  animation: heroEntrance 0.5s ease-out 0.25s both;
-}
-
-.hero-enter-4 {
-  animation: heroEntrance 0.5s ease-out 0.35s both;
-}
-
-.hero-enter-5 {
-  animation: heroEntrance 0.5s ease-out 0.45s both;
-}
-
-/* Scroll reveal utility */
-.reveal-item {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-item.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Modal backdrop animation */
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modalContentIn {
-  from {
-    opacity: 0;
-    transform: scale(0.97) translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.modal-backdrop-animate {
-  animation: modalFadeIn 0.25s ease-out forwards;
-}
-
-.modal-content-animate {
-  animation: modalContentIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Custom technical scrollbar */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0b1120;
+  background: #0a0d12;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #243552;
+  background: #202833;
   border-radius: 4px;
-  border: 2px solid #0b1120;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #3b495e;
 }
 
-/* Prefers-reduced-motion accessibility rules */
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *,
-  *::before,
-  *::after {
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  .reveal-item {
-    opacity: 1 !important;
-    transform: none !important;
   }
 }

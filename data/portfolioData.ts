@@ -14,22 +14,43 @@ export interface Project {
   date: string;
   technologies: string[];
   description: string;
-  concepts?: string[];
-  highlights?: string[];
-  context?: string;
+  accentColor: string;
+  domain?: string;
   category?: string;
+  context?: string;
+  highlights?: string[];
+  image?: string;
   caseStudy?: CaseStudy;
+  github?: string;
+  demo?: string;
 }
 
 export interface Experience {
   organization: string;
   role: string;
-  position?: string;
-  date?: string;
-  project?: string;
-  tools?: string[];
-  work: string[];
-  description?: string;
+  period: string;
+  year: string;
+  description: string;
+  technologies: string[];
+  image?: string;
+}
+
+export interface EducationEntry {
+  id: string;
+  institution: string;
+  degree: string;
+  duration: string;
+  yearStart: number;
+  yearEnd: number;
+  score: string;
+  scoreLabel: string;
+  secondaryScore?: string;
+  secondaryScoreLabel?: string;
+  location: string;
+  description: string;
+  isPrimary: boolean;
+  image?: string;
+  courseworkOrFocus?: string[];
 }
 
 export interface Achievement {
@@ -39,12 +60,14 @@ export interface Achievement {
   solution: string;
   role?: string;
   badge?: string;
+  year: string;
 }
 
 export interface Publication {
   title: string;
   venue: string;
   date: string;
+  year: string;
   technologies?: string[];
   type: "Journal" | "Conference";
 }
@@ -60,23 +83,23 @@ export interface SkillCategory {
   code: string;
   description: string;
   skills: string[];
-  relatedProjectIds?: string[];
 }
 
 export interface LeadershipActivity {
   role: string;
   organization: string;
-  detail?: string;
+  detail: string;
 }
 
 export const personalInfo = {
   name: "Abhishek Ahirrao",
-  callsign: "AA // EMBEDDED",
-  primaryTitle: "Embedded Systems & Electronics Engineering Student",
+  primaryTitle: "Electronics & Telecommunication Engineering Student",
+  focus: "Embedded Systems • Simulation • FPGA • Autonomous Systems",
   secondaryDescription:
-    "Electronics & Telecommunication Engineering student focused on Embedded Systems, Embedded Software, Real-Time Systems and Hardware–Software Integration.",
+    "Electronics & Telecommunication Engineering student focused on Embedded Systems, Embedded Software, Real-Time Systems, and Hardware–Software Integration.",
   college: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
   location: "Nashik, Maharashtra, India",
+  profileImage: "/images/profile/abhishek.jpeg",
   education: {
     degree: "B.Tech. Electronics & Telecommunication Engineering",
     duration: "2023–2027",
@@ -85,10 +108,10 @@ export const personalInfo = {
     highestSgpa: "9.00 / 10",
   },
   aboutParagraphs: [
-    "I'm Abhishek Ahirrao, an Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research, with a primary focus on Embedded Systems and real-time engineering.",
-    "I enjoy building systems that bridge hardware and software — from ESP32-based embedded communication and sensor systems to FPGA/RTL designs and autonomous vehicle control prototypes.",
-    "My work spans Embedded C, microcontrollers, communication protocols, FPGA development, control systems and edge computing, with additional experience in MATLAB/Simulink, Python and AI-assisted engineering applications.",
-    "I like turning engineering concepts into working prototypes, validating them through simulation and testing, and continuously learning how embedded systems can solve real-world problems.",
+    "I am an Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research, focusing on Embedded Systems and deterministic real-time firmware.",
+    "My hands-on engineering work bridges microcontrollers, sensor buses, low-latency wireless communication, and FPGA hardware acceleration. Rather than relying on simulated abstractions alone, I build and validate physical vehicle prototypes, custom sensor boards, and RTL digital logic.",
+    "My practical work spans Embedded C, ESP32 FreeRTOS tasks, peer-to-peer ESP-NOW protocol pipelines, Verilog HDL synthesis on Artix-7 FPGAs, and MATLAB/Simulink dynamic system modeling.",
+    "I focus on turning mathematical control models into reliable physical embedded systems, verifying timing constraints, and deploying low-latency solutions for autonomous vehicles, edge monitoring, and aerospace subsystems.",
   ],
   socials: {
     email: "abhishekahirrao3m4@gmail.com",
@@ -100,7 +123,7 @@ export const personalInfo = {
 export const technicalSkillCategories: SkillCategory[] = [
   {
     title: "Embedded Systems",
-    code: "MCU_CORE",
+    code: "MCU",
     description: "Firmware architecture, peripheral control, real-time deterministic execution",
     skills: [
       "Embedded C",
@@ -115,11 +138,10 @@ export const technicalSkillCategories: SkillCategory[] = [
       "Real-Time Systems",
       "Hardware–Software Integration",
     ],
-    relatedProjectIds: ["v2v-autonomous-vehicle-control", "mobile-smart-home-automation"],
   },
   {
-    title: "Communication",
-    code: "BUS_PROTO",
+    title: "Communication Buses",
+    code: "BUS",
     description: "Synchronous, asynchronous, industrial and wireless peer-to-peer protocols",
     skills: [
       "UART",
@@ -129,11 +151,10 @@ export const technicalSkillCategories: SkillCategory[] = [
       "ESP-NOW",
       "Wi-Fi",
     ],
-    relatedProjectIds: ["v2v-autonomous-vehicle-control", "mobile-smart-home-automation"],
   },
   {
     title: "Digital / FPGA",
-    code: "RTL_SYNTH",
+    code: "RTL",
     description: "Hardware description, register-transfer logic, simulation and FPGA implementation",
     skills: [
       "Verilog HDL",
@@ -143,11 +164,10 @@ export const technicalSkillCategories: SkillCategory[] = [
       "Artix-7 FPGA",
       "Digital Design",
     ],
-    relatedProjectIds: ["fpga-image-deduplication-engine"],
   },
   {
     title: "Control / Simulation",
-    code: "CTRL_SIM",
+    code: "SIM",
     description: "Model-based design, dynamic system simulation and scenario validation",
     skills: [
       "MATLAB",
@@ -159,11 +179,10 @@ export const technicalSkillCategories: SkillCategory[] = [
       "OpenRocket",
       "Model-Based Design",
     ],
-    relatedProjectIds: ["twinx-digital-twin", "water-rocket-parametric-optimization", "v2v-autonomous-vehicle-control"],
   },
   {
-    title: "Software / AI",
-    code: "EDGE_ML",
+    title: "Software & Edge ML",
+    code: "ML",
     description: "Data pipelines, computer vision, machine learning models and edge integration",
     skills: [
       "Python",
@@ -174,13 +193,11 @@ export const technicalSkillCategories: SkillCategory[] = [
       "Scikit-learn",
       "Streamlit",
       "REST APIs",
-      "LLM API Integration",
     ],
-    relatedProjectIds: ["gaganix-space-weather", "twinx-digital-twin"],
   },
   {
     title: "Industrial Automation",
-    code: "IND_AUTO",
+    code: "PLC",
     description: "Programmable logic controllers, human-machine interfaces and fieldbus networking",
     skills: [
       "Siemens TIA Portal",
@@ -190,48 +207,76 @@ export const technicalSkillCategories: SkillCategory[] = [
       "PROFINET",
       "Modbus",
     ],
-    relatedProjectIds: ["mobile-smart-home-automation"],
   },
 ];
 
 export const featuredProjects: Project[] = [
   {
+    id: "twinx-digital-twin",
+    title: "TwinX — AI-Powered Digital Twin Platform for Indian Traffic Simulation",
+    role: "Simulation & Digital Twin Developer",
+    date: "Dec 2025",
+    accentColor: "#00f0ff",
+    image: "/images/projects/twinx.jpg",
+    technologies: [
+      "MATLAB",
+      "Simulink",
+      "RoadRunner",
+      "Automated Driving Toolbox",
+      "Python",
+    ],
+    description:
+      "High-fidelity Indian traffic simulation platform combining RoadRunner 3D road models, MATLAB/Simulink vehicle dynamics, and AI scenario generation. Contributed to winning 1st Prize nationally at Smart India Hackathon 2025 out of 50,000+ teams.",
+    github: "https://github.com/Abhishek3m4",
+    caseStudy: {
+      problem:
+        "Standard traffic simulators assume strict lane adherence and homogeneous traffic, failing completely when applied to dense, heterogeneous, non-lane-based Indian road networks.",
+      approach:
+        "Engineered a digital twin platform combining RoadRunner high-fidelity 3D road models, MATLAB/Simulink vehicle dynamics, and AI scenario generation to replicate real Indian traffic environments.",
+      architecture: [
+        "Scenario Generator: RoadRunner + Driving Scenario Designer for realistic road geometry",
+        "Dynamics Core: MATLAB & Simulink vehicle dynamics and collision logic",
+        "AI Co-Pilot: Multi-LLM integration for dynamic incident simulation and traffic policy testing",
+      ],
+      implementation: [
+        "Calibrated mixed-vehicle interaction models (auto-rickshaws, two-wheelers, heavy vehicles)",
+        "Integrated Automated Driving Toolbox sensor models for ADAS evaluation",
+        "Demonstrated live dynamic simulation at the national finals",
+      ],
+      results: [
+        "National Winner — Smart India Hackathon 2025 (AICTE × MathWorks, ₹1,50,000 cash prize)",
+        "Selected as 1st prize winner out of 50,000+ participating engineering teams",
+      ],
+      status: "National Champion — SIH 2025",
+    },
+  },
+  {
     id: "v2v-autonomous-vehicle-control",
     title: "V2V-Based Autonomous Vehicle Control Prototype Using Edge Computing",
     role: "Embedded Software Developer",
     date: "Feb 2026 – Present",
+    accentColor: "#10b981",
+    image: "/images/projects/v2v.jpg",
     technologies: [
       "ESP32",
       "Embedded C",
-      "Python",
+      "FreeRTOS",
       "ESP-NOW",
-      "Wi-Fi",
-      "OpenCV",
-      "GPS",
       "MPU6050",
       "Ultrasonic Sensors",
-      "Motor Drivers",
       "PWM",
     ],
     description:
-      "Developed an ESP32-based Vehicle-to-Vehicle communication and autonomous control prototype focused on cooperative driving and collision avoidance. Implemented real-time wireless communication using ESP-NOW, explored Time-To-Collision based safety logic, and integrated embedded control with Python-based simulation and validation.",
-    concepts: [
-      "V2V communication",
-      "Adaptive Cruise Control",
-      "Collision prediction",
-      "Time-To-Collision",
-      "Cooperative driving",
-      "Autonomous decision making",
-      "Edge computing",
-    ],
+      "Engineered dual-core ESP32 vehicle nodes executing an ESP-NOW peer-to-peer telemetry loop with sub-10ms packet dispatch. Integrated MPU6050 inertial sensing, ultrasonic ranging, and Time-To-Collision (TTC) safety logic to control throttle and braking.",
+    github: "https://github.com/Abhishek3m4",
     caseStudy: {
       problem:
-        "Conventional automotive collision avoidance is constrained by sensor occlusions, line-of-sight blind spots, and cellular communication latency (>100ms). Safe cooperative platooning requires deterministic, real-time wireless telemetry directly between vehicle nodes without dependency on external infrastructure.",
+        "Conventional automotive collision avoidance is constrained by sensor occlusions, line-of-sight blind spots, and cellular communication latency (>100ms). Safe cooperative platooning requires deterministic, real-time wireless telemetry directly between vehicle nodes without external infrastructure.",
       approach:
         "Engineered dual-core ESP32 vehicle nodes executing an ESP-NOW peer-to-peer telemetry loop with sub-10ms packet dispatch. Coupled an MPU6050 6-DOF IMU, ultrasonic rangefinder, and GPS module with an embedded Time-To-Collision (TTC) safety supervisor controlling PWM motor drivers.",
       architecture: [
         "Telemetry Node: Dual-core ESP32 (FreeRTOS scheduler for parallel sensing & transmission)",
-        "Sensor Suite: MPU6050 IMU (inertial vectors) + Ultrasonic transceiver + GPS module",
+        "Sensor Suite: MPU6050 IMU + Ultrasonic transceiver + GPS module",
         "P2P Protocol: ESP-NOW 2.4 GHz low-latency connectionless packet broadcast",
         "Control Engine: Time-To-Collision (TTC) algorithm with automated throttle/braking actuation",
         "HIL Verification: Python telemetry logger & trajectory visualization harness",
@@ -253,27 +298,23 @@ export const featuredProjects: Project[] = [
   {
     id: "fpga-image-deduplication-engine",
     title: "FPGA-Based Real-Time Image Deduplication Engine for Edge Wildlife Monitoring",
-    role: "Team Lead – RTL Design Developer",
+    role: "Team Lead & RTL Design Developer",
     date: "Apr 2026",
+    accentColor: "#f59e0b",
+    image: "/images/projects/fpga.jpg",
     technologies: [
       "Verilog HDL",
       "Xilinx Vivado",
       "ModelSim",
       "Artix-7 FPGA",
+      "RTL Design",
     ],
     description:
-      "Designed and verified a Verilog HDL-based real-time image deduplication engine for edge devices. Developed a 64-bit image signature generation architecture, verified the RTL using ModelSim, and synthesized the design on an Artix-7 FPGA using Xilinx Vivado.",
-    highlights: [
-      "RTL architecture",
-      "64-bit image signature generation",
-      "Real-time duplicate detection",
-      "ModelSim verification",
-      "Vivado synthesis",
-      "FPGA resource/latency optimization",
-    ],
+      "Designed a Verilog HDL pipeline that constructs 64-bit perceptual image signatures in hardware registers and performs clock-cycle Hamming-distance comparison against cached references. Synthesized on an Artix-7 FPGA and verified in ModelSim, winning 1st Prize at the Unplugged Hackathon.",
+    github: "https://github.com/Abhishek3m4",
     caseStudy: {
       problem:
-        "Edge wildlife camera traps capture thousands of redundant, empty frames that overwhelm storage arrays and cellular backhaul bandwidth. Software-based deduplication consumes excessive power on remote battery installations, requiring dedicated, low-power RTL hardware acceleration.",
+        "Edge wildlife camera traps capture thousands of redundant, empty frames that overwhelm storage arrays and cellular backhaul bandwidth. Software-based deduplication consumes excessive power on remote battery installations, requiring dedicated low-power RTL hardware acceleration.",
       approach:
         "Designed a high-throughput Verilog HDL pipeline that constructs 64-bit perceptual image signatures in hardware registers and performs clock-cycle deterministic Hamming-distance comparison against cached references.",
       architecture: [
@@ -299,22 +340,20 @@ export const featuredProjects: Project[] = [
   {
     id: "mobile-smart-home-automation",
     title: "Mobile-Controlled Smart Home Automation System",
-    role: "Developer",
+    role: "Embedded Hardware Developer",
     date: "Apr 2024 – May 2024",
+    accentColor: "#a855f7",
+    image: "/images/projects/smart-home.jpg",
     technologies: [
       "ESP32",
-      "Arduino",
-      "Arduino IDE",
-      "Relays",
-      "Microcontrollers",
+      "Arduino C++",
+      "Relay Drivers",
+      "Wi-Fi",
+      "GPIO Switching",
     ],
     description:
-      "Developed an ESP32-based smart home automation system for remotely controlling household electrical loads through a microcontroller-based architecture.",
-    highlights: [
-      "Microcontroller-based switching architecture",
-      "Multi-channel relay isolation & driver circuitry",
-      "Remote wireless state control & monitoring",
-    ],
+      "Developed an ESP32-based multi-channel appliance switching system with optocoupler galvanic isolation between 3.3V logic and AC mains. Implemented non-blocking state firmware for reliable wireless control.",
+    github: "https://github.com/Abhishek3m4",
     caseStudy: {
       problem:
         "Standard home electrical appliances require physical switch interaction and lack intelligent power control or state monitoring, while retrofit commercial solutions are proprietary and inflexible.",
@@ -338,124 +377,43 @@ export const featuredProjects: Project[] = [
       status: "Hardware Prototype Tested & Operational",
     },
   },
-];
-
-export const otherProjects: Project[] = [
-  {
-    id: "twinx-digital-twin",
-    title: "TwinX — AI-Powered Digital Twin Platform for Indian Traffic Simulation",
-    role: "Simulation & Digital Twin Developer",
-    date: "SIH 2025",
-    category: "Simulation & Digital Twin",
-    technologies: [
-      "MATLAB",
-      "Simulink",
-      "RoadRunner",
-      "Automated Driving Toolbox",
-      "Driving Scenario Designer",
-      "Python",
-      "Claude API",
-      "Grok API",
-      "TRELLIS",
-    ],
-    description:
-      "High-fidelity Indian traffic simulation platform built with MATLAB/Simulink and scenario design tools. Contributed to the National Winner Smart India Hackathon 2025 solution.",
-    context: "Contributed to the National Winner Smart India Hackathon 2025 solution.",
-    caseStudy: {
-      problem:
-        "Standard traffic simulators assume strict lane adherence and homogeneous traffic, failing completely when applied to dense, heterogeneous, non-lane-based Indian road networks.",
-      approach:
-        "Engineered a digital twin platform combining RoadRunner high-fidelity 3D road models, MATLAB/Simulink vehicle dynamics, and AI scenario generation to replicate real Indian traffic environments.",
-      architecture: [
-        "Scenario Generator: RoadRunner + Driving Scenario Designer for realistic road geometry",
-        "Dynamics Core: MATLAB & Simulink vehicle dynamics and collision logic",
-        "AI Co-Pilot: Multi-LLM integration for dynamic incident simulation and traffic policy testing",
-      ],
-      implementation: [
-        "Calibrated mixed-vehicle interaction models (auto-rickshaws, two-wheelers, heavy vehicles)",
-        "Integrated Automated Driving Toolbox sensor models for ADAS evaluation",
-        "Demonstrated live dynamic simulation at the national finals",
-      ],
-      results: [
-        "National Winner — Smart India Hackathon 2025 (AICTE × MathWorks, ₹1,50,000 cash prize)",
-        "Selected as 1st prize winner out of 50,000+ participating engineering teams",
-      ],
-      status: "National Champion — SIH 2025",
-    },
-  },
-  {
-    id: "gaganix-space-weather",
-    title: "GaganiX — AI-Driven Space Weather Radiation Forecasting System",
-    role: "Machine Learning & Data Processing Engineer",
-    date: "Space Weather Project",
-    category: "Machine Learning & Edge Data",
-    technologies: [
-      "Python",
-      "Pandas",
-      "NumPy",
-      "PyTorch",
-      "Scikit-learn",
-      "CDFlib",
-      "Streamlit",
-      "Git",
-    ],
-    description:
-      "Engineered machine learning pipelines for multi-horizon radiation forecasting using 11 years of satellite radiation and solar-wind datasets, encompassing feature engineering, preprocessing, and model training.",
-    context:
-      "Worked with 11 years of satellite radiation and solar-wind datasets including preprocessing, feature engineering, model training and multi-horizon forecasting.",
-    caseStudy: {
-      problem:
-        "Solar energetic particle events and coronal mass ejections can degrade satellite electronics and endanger aerospace missions. Early predictive warnings require parsing decades of astrophysical data.",
-      approach:
-        "Built an end-to-end predictive machine learning pipeline ingesting 11 years of NASA/satellite CDF telemetry to forecast radiation flux horizons.",
-      architecture: [
-        "Ingestion: CDFlib parser reading multi-dimensional satellite radiation logs",
-        "Feature Pipeline: Solar wind speed, magnetic field IMF vectors, and proton flux metrics",
-        "Model Architecture: Multi-horizon PyTorch regression models with cross-validation",
-        "Dashboard: Streamlit real-time interactive telemetry visualization",
-      ],
-      implementation: [
-        "Handled missing values and sensor drift across 11 years of temporal telemetry",
-        "Trained and compared deep learning and gradient boosted models for multi-hour forecasting",
-        "Optimized inference time for edge and operations center deployment",
-      ],
-      results: [
-        "Accurate predictive horizons for high-energy solar radiation events",
-        "Clean interactive dashboard interface for mission controllers",
-      ],
-      status: "Validated on 11-Year Satellite Dataset",
-    },
-  },
   {
     id: "water-rocket-parametric-optimization",
     title: "Automated Parametric Optimization for Water Rocket",
-    role: "Simulation & Optimization Developer",
+    role: "Research Intern (BSERC)",
     date: "Dec 2025 – Jan 2026",
-    category: "Trajectory Modelling & Simulation",
-    technologies: ["MATLAB", "Simulink", "OpenRocket"],
+    accentColor: "#ff6b6b",
+    image: "/images/projects/water-rocket.jpg",
+    technologies: [
+      "MATLAB",
+      "Simulink",
+      "OpenRocket",
+      "Trajectory Dynamics",
+      "Optimization",
+    ],
     description:
-      "Developed a simulation-based optimization workflow for water-rocket design by analyzing parameters such as water-fill ratio and launch pressure using MATLAB, Simulink and OpenRocket.",
-    context: "Connected to research work at Bharat Space Education Research Centre.",
+      "Developed automated MATLAB/Simulink and OpenRocket aerodynamic models to optimize water-fill ratios, launch pressures, and apogee trajectories across multiple flight simulation scenarios.",
+    github: "https://github.com/Abhishek3m4",
     caseStudy: {
       problem:
-        "Water rocket apogee altitude is determined by non-linear pneumatic expansion, transient water mass loss, and variable aerodynamic drag. Finding optimal launch parameters manually requires prohibitive trial-and-error.",
+        "Water rocket performance depends on non-linear thermodynamic interactions between air pressure, water volume, and nozzle thrust dynamics that are difficult to optimize via manual trial and error.",
       approach:
-        "Formulated automated mathematical simulation sweeps linking MATLAB differential equation solvers with OpenRocket trajectory aerodynamics.",
+        "Built a parametric MATLAB/Simulink dynamic simulation framework integrated with OpenRocket to mathematically determine peak apogee configurations.",
       architecture: [
-        "Thermodynamic Model: Isentropic air expansion and water mass ejection dynamics in MATLAB",
-        "Flight Simulator: OpenRocket 6-DOF trajectory and aerodynamic drag simulation",
-        "Optimization Engine: Automated parameter sweep evaluating fill ratios (20%–60%) and pressures",
+        "Thermodynamic Engine: Adiabatic air expansion model calculating instantaneous chamber pressure",
+        "Thrust Core: Mass-depletion thrust curves determining propellant burnout altitude",
+        "Trajectory Integrator: 3-DOF aerodynamic drag and gravity solver",
       ],
       implementation: [
-        "Developed coupled differential equations modeling pressure decay and thrust profile",
-        "Scripted automated multi-run scenario batches across varied atmospheric conditions",
-        "Correlated simulation predictions with experimental water-rocket launch trials",
+        "Iterated over parametric grids spanning water-fill ratios from 20% to 50% across variable pressures",
+        "Automated batch simulation scripts to extract optimal apogee and stability margins",
+        "Correlated simulation predictions against physical launch telemetry logs",
       ],
       results: [
-        "Identified precise optimal water-fill fraction for maximum altitude efficiency",
-        "Completed as primary research deliverable during winter internship at Bharat Space Education Research Centre",
+        "Identified the global optimal water-fill ratio for maximum vertical apogee",
+        "Completed research internship at Bharat Space Education Research Centre with commended evaluation",
       ],
-      status: "Completed Research Internship Deliverable",
+      status: "Research Completed & Validated",
     },
   },
 ];
@@ -463,37 +421,32 @@ export const otherProjects: Project[] = [
 export const engineeringExperiences: Experience[] = [
   {
     organization: "Bharat Space Education Research Centre",
-    role: "Virtual Research Intern",
-    position: "Winter Research Intern",
-    date: "Dec 2025 – Jan 2026",
-    project: "Automated Parametric Optimization for Water Rocket",
-    tools: ["MATLAB", "Simulink", "OpenRocket"],
-    work: [
-      "Water-fill ratio modelling",
-      "Launch-pressure modelling",
-      "Automated parameter analysis",
-      "Simulation-based optimization",
-      "OpenRocket trajectory visualization",
-      "Validation through multiple scenarios",
-    ],
+    role: "Winter Research Intern",
+    period: "Dec 2025 – Jan 2026",
+    year: "2025",
+    image: "/images/experience/bharat-space.jpg",
+    technologies: ["MATLAB", "Simulink", "OpenRocket", "Trajectory Dynamics"],
     description:
-      "Developed a simulation-based optimization workflow for water-rocket design by analyzing parameters such as water-fill ratio and launch pressure using MATLAB, Simulink and OpenRocket.",
+      "Developed automated parametric simulation and optimization workflows for water rocket propulsion and aerodynamics. Analyzed water-fill ratios, chamber pressures, and apogee trajectories using MATLAB, Simulink, and OpenRocket.",
   },
   {
-    organization: "Team Antariiksh",
-    role: "Avionics Sub-Lead / Avionics & Flight Computer Member",
-    work: [
-      "Avionics subsystem development",
-      "Embedded systems",
-      "MATLAB",
-      "Arduino IDE",
-      "Proteus",
-      "Wokwi",
-      "Simulation-assisted validation",
-      "Technical coordination",
-    ],
+    organization: "Team Antariiksh (Space Club of KKWIEER)",
+    role: "Avionics Sub-Lead",
+    period: "2025 – Present",
+    year: "2026",
+    image: "/images/experience/team-antariiksh.jpg",
+    technologies: ["Avionics", "Embedded Systems", "Flight Computer", "Sensor Buses"],
     description:
-      "Contributing to avionics subsystem architecture, flight computer verification, and embedded hardware validation using simulation and prototyping environments.",
+      "Leading avionics subsystem architecture, flight computer verification, and embedded hardware validation. Coordinating telemetry acquisition, sensor bus interfacing, and prototyping environments.",
+  },
+  {
+    organization: "Systems & Embedded Hardware Research",
+    role: "Independent Hardware & RTL Developer",
+    period: "2024 – Present",
+    year: "PRESENT",
+    technologies: ["ESP32", "Artix-7 FPGA", "Verilog HDL", "FreeRTOS", "MATLAB"],
+    description:
+      "Designing deterministic embedded firmware, RTL hardware acceleration on Artix-7 FPGAs, and low-latency peer-to-peer communication architectures for autonomous vehicular and edge monitoring applications.",
   },
 ];
 
@@ -501,17 +454,19 @@ export const achievements: Achievement[] = [
   {
     title: "National Winner — Smart India Hackathon 2025",
     organizer: "AICTE × MathWorks",
-    award: "₹1,50,000",
-    solution: "TwinX / high-fidelity Indian traffic simulation",
+    award: "₹1,50,000 Cash Prize",
+    solution: "TwinX / High-Fidelity Indian Traffic Simulation",
     badge: "1st of 50,000+ Teams",
+    year: "2025",
   },
   {
     title: "First Prize — Unplugged Hackathon",
     organizer: "DJ Sanghvi College of Engineering",
-    award: "₹25,000",
-    solution: "FPGA / VLSI solution — Real-Time Image Deduplication Engine",
-    role: "Team Lead / RTL Design Developer",
+    award: "₹25,000 Cash Prize",
+    solution: "Real-Time Image Deduplication Engine on Artix-7 FPGA",
+    role: "Team Lead & RTL Developer",
     badge: "Champion",
+    year: "2026",
   },
 ];
 
@@ -520,12 +475,14 @@ export const publications: Publication[] = [
     title: "V2V-Based Autonomous Vehicle Control Prototype Using Edge Computing",
     venue: "International Journal of Emerging Trends in Engineering and Development (IJETED)",
     date: "May 2026",
+    year: "2026",
     type: "Journal",
   },
   {
     title: "IoT-Oriented Low-Power ALU with Dynamic Mode Switching for Energy Harvesting Applications",
-    venue: "International Conference on Interdisciplinary Technology & Science Convergence (ICITSC 2025)",
+    venue: "International Conference on Interdisciplinary Technology & Science Convergence (ICITSC)",
     date: "Dec 2025",
+    year: "2025",
     technologies: ["Xilinx Vivado", "ModelSim", "Digital Design"],
     type: "Conference",
   },
@@ -543,24 +500,81 @@ export const certifications: Certification[] = [
     status: "Completed",
   },
   {
-    name: "Introduction to Quantum Computing: Quantum Algorithms & Qiskit",
+    name: "Introduction to Quantum Computing",
     issuer: "NPTEL / SWAYAM",
     status: "Completed",
   },
   {
     name: "Cisco CCNA 200-301",
-    issuer: "Udemy",
+    issuer: "Networking",
     status: "Ongoing",
   },
   {
     name: "Siemens S7-1200 PLC & HMI using TIA Portal",
-    issuer: "Udemy",
+    issuer: "Industrial Automation",
     status: "Ongoing",
   },
+];
+
+export const educationTimeline: EducationEntry[] = [
   {
-    name: "Japanese JLPT N5",
-    issuer: "In Progress",
-    status: "Ongoing",
+    id: "btech-entc",
+    institution: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
+    degree: "B.Tech. Electronics & Telecommunication Engineering",
+    duration: "2023–2027",
+    yearStart: 2023,
+    yearEnd: 2027,
+    score: "8.69 / 10",
+    scoreLabel: "CUMULATIVE CGPA (UP TO SEM VI)",
+    secondaryScore: "9.00 / 10",
+    secondaryScoreLabel: "HIGHEST SEMESTER SGPA",
+    location: "Nashik, Maharashtra, India",
+    description:
+      "Specializing in Embedded Systems, Real-Time Firmware Architecture, Hardware–Software Co-Design, Communication Buses (CAN, SPI, I²C, ESP-NOW), and RTL/VLSI Synthesis on Artix-7 FPGAs.",
+    isPrimary: true,
+    image: "/images/education/college.jpg",
+    courseworkOrFocus: [
+      "Embedded Systems Design",
+      "Microcontrollers & Real-Time OS",
+      "Digital VLSI / Verilog HDL",
+      "Serial & Wireless Telemetry",
+      "Control Systems Engineering",
+      "Digital Signal Processing",
+    ],
+  },
+  {
+    id: "hsc-bhonsala",
+    institution: "Bhonsala Military College, Nashik",
+    degree: "Higher Secondary Certificate (HSC) — Science Stream",
+    duration: "2021–2023",
+    yearStart: 2021,
+    yearEnd: 2023,
+    score: "87.51 %ile",
+    scoreLabel: "JEE MAIN PERCENTILE",
+    secondaryScore: "65.17%",
+    secondaryScoreLabel: "HSC BOARD SCORE",
+    location: "Nashik, Maharashtra, India",
+    description:
+      "Core foundation in Advanced Mathematics, Classical Physics, and Physical Chemistry with disciplined analytical aptitude training.",
+    isPrimary: false,
+    image: "/images/education/hsc.png",
+    courseworkOrFocus: ["Mathematics", "Physics", "Chemistry", "State Board"],
+  },
+  {
+    id: "ssc-stpeters",
+    institution: "St. Peters English Medium School, Nashik",
+    degree: "Secondary School Certificate (SSC)",
+    duration: "2021",
+    yearStart: 2020,
+    yearEnd: 2021,
+    score: "91.20%",
+    scoreLabel: "SSC BOARD EXAMINATION",
+    location: "Nashik, Maharashtra, India",
+    description:
+      "Foundational scholastic training with distinction in Mathematics and General Sciences.",
+    isPrimary: false,
+    image: "/images/education/ssc.jpg",
+    courseworkOrFocus: ["Mathematics", "General Science", "Computer Fundamentals"],
   },
 ];
 
@@ -582,53 +596,5 @@ export const leadershipActivities: LeadershipActivity[] = [
   },
 ];
 
-export const hardwareSignalFlowNodes = [
-  {
-    step: "01",
-    label: "Microcontroller",
-    sub: "ESP32 Core / FreeRTOS",
-    code: "CORE_MCU",
-    accent: "border-cyan-500/30 text-cyan-400 bg-cyan-950/20",
-    dot: "bg-cyan-400",
-  },
-  {
-    step: "02",
-    label: "Sensors",
-    sub: "MPU6050 • Ultrasonic • GPS",
-    code: "SENS_ACQ",
-    accent: "border-sky-500/30 text-sky-400 bg-sky-950/20",
-    dot: "bg-sky-400",
-  },
-  {
-    step: "03",
-    label: "Communication",
-    sub: "ESP-NOW • UART • SPI • CAN",
-    code: "BUS_LINK",
-    accent: "border-indigo-500/30 text-indigo-400 bg-indigo-950/20",
-    dot: "bg-indigo-400",
-  },
-  {
-    step: "04",
-    label: "Control",
-    sub: "TTC Safety • PID / PWM Actuation",
-    code: "CTRL_LOOP",
-    accent: "border-emerald-500/30 text-emerald-400 bg-emerald-950/20",
-    dot: "bg-emerald-400",
-  },
-  {
-    step: "05",
-    label: "Edge Computing",
-    sub: "Artix-7 FPGA / Edge Models",
-    code: "EDGE_PROC",
-    accent: "border-teal-500/30 text-teal-400 bg-teal-950/20",
-    dot: "bg-teal-400",
-  },
-  {
-    step: "06",
-    label: "Real-World System",
-    sub: "Cooperative Autonomous V2V",
-    code: "PHYS_SYS",
-    accent: "border-amber-500/30 text-amber-400 bg-amber-950/20",
-    dot: "bg-amber-400",
-  },
-];
+export const otherProjects: Project[] = [];
+
