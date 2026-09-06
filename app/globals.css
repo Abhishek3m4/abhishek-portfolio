@@ -1,11 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #06090e;
-  --foreground: #e6edf3;
-  --panel-bg: #0b111c;
-  --panel-border: #1a2538;
+  --background: #0b1120;
+  --background-alt: #0f172a;
+  --background-card: #162238;
+  --background-card-hover: #1c2b45;
+  --foreground: #f8fafc;
+  --foreground-muted: #cbd5e1;
+  --foreground-dim: #94a3b8;
+  --border-subtle: #243552;
+  --border-focus: #38bdf8;
   --accent-cyan: #22d3ee;
+  --accent-teal: #14b8a6;
   --accent-emerald: #10b981;
   --accent-amber: #f59e0b;
 }
@@ -13,8 +19,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-panel: var(--panel-bg);
-  --color-panel-border: var(--panel-border);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -33,30 +37,32 @@ body {
   selection-color: #ffffff;
 }
 
-/* Subtle Engineering Grid Background */
+/* Subtle Engineering Grid Background - Softer and less tiring */
 .bg-circuit-grid {
-  background-size: 36px 36px;
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(34, 211, 238, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(34, 211, 238, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(56, 189, 248, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.035) 1px, transparent 1px);
 }
 
 .bg-dot-grid {
   background-size: 24px 24px;
-  background-image: radial-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(148, 163, 184, 0.07) 1px, transparent 1px);
 }
 
-/* Engineering panel card */
+/* Soft Dark Engineering Card System */
 .tech-card {
-  background-color: rgba(11, 17, 28, 0.75);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(34, 211, 238, 0.12);
+  background-color: rgba(22, 34, 56, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tech-card:hover {
-  border-color: rgba(34, 211, 238, 0.35);
-  box-shadow: 0 4px 20px -2px rgba(34, 211, 238, 0.08);
+  background-color: rgba(28, 43, 69, 0.95);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(2, 6, 23, 0.5), 0 0 15px -3px rgba(34, 211, 238, 0.1);
 }
 
 /* Restrained LED pulse */
@@ -90,22 +96,112 @@ body {
   animation: busFlow 1.2s linear infinite;
 }
 
+/* Staged Hero Entrance Keyframes */
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-enter-1 {
+  animation: heroEntrance 0.5s ease-out 0.05s both;
+}
+
+.hero-enter-2 {
+  animation: heroEntrance 0.5s ease-out 0.15s both;
+}
+
+.hero-enter-3 {
+  animation: heroEntrance 0.5s ease-out 0.25s both;
+}
+
+.hero-enter-4 {
+  animation: heroEntrance 0.5s ease-out 0.35s both;
+}
+
+.hero-enter-5 {
+  animation: heroEntrance 0.5s ease-out 0.45s both;
+}
+
+/* Scroll reveal utility */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Modal backdrop animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalContentIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-backdrop-animate {
+  animation: modalFadeIn 0.25s ease-out forwards;
+}
+
+.modal-content-animate {
+  animation: modalContentIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 /* Custom technical scrollbar */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #06090e;
+  background: #0b1120;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 3px;
-  border: 1px solid #334155;
+  background: #243552;
+  border-radius: 4px;
+  border: 2px solid #0b1120;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #38bdf8;
+}
+
+/* Prefers-reduced-motion accessibility rules */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

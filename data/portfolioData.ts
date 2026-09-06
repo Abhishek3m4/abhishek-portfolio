@@ -1,3 +1,12 @@
+export interface CaseStudy {
+  problem: string;
+  approach: string;
+  architecture: string[];
+  implementation: string[];
+  results: string[];
+  status: string;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -9,6 +18,7 @@ export interface Project {
   highlights?: string[];
   context?: string;
   category?: string;
+  caseStudy?: CaseStudy;
 }
 
 export interface Experience {
@@ -50,6 +60,7 @@ export interface SkillCategory {
   code: string;
   description: string;
   skills: string[];
+  relatedProjectIds?: string[];
 }
 
 export interface LeadershipActivity {
@@ -104,6 +115,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "Real-Time Systems",
       "Hardware–Software Integration",
     ],
+    relatedProjectIds: ["v2v-autonomous-vehicle-control", "mobile-smart-home-automation"],
   },
   {
     title: "Communication",
@@ -117,6 +129,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "ESP-NOW",
       "Wi-Fi",
     ],
+    relatedProjectIds: ["v2v-autonomous-vehicle-control", "mobile-smart-home-automation"],
   },
   {
     title: "Digital / FPGA",
@@ -130,6 +143,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "Artix-7 FPGA",
       "Digital Design",
     ],
+    relatedProjectIds: ["fpga-image-deduplication-engine"],
   },
   {
     title: "Control / Simulation",
@@ -145,6 +159,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "OpenRocket",
       "Model-Based Design",
     ],
+    relatedProjectIds: ["twinx-digital-twin", "water-rocket-parametric-optimization", "v2v-autonomous-vehicle-control"],
   },
   {
     title: "Software / AI",
@@ -161,6 +176,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "REST APIs",
       "LLM API Integration",
     ],
+    relatedProjectIds: ["gaganix-space-weather", "twinx-digital-twin"],
   },
   {
     title: "Industrial Automation",
@@ -174,6 +190,7 @@ export const technicalSkillCategories: SkillCategory[] = [
       "PROFINET",
       "Modbus",
     ],
+    relatedProjectIds: ["mobile-smart-home-automation"],
   },
 ];
 
@@ -207,6 +224,31 @@ export const featuredProjects: Project[] = [
       "Autonomous decision making",
       "Edge computing",
     ],
+    caseStudy: {
+      problem:
+        "Conventional automotive collision avoidance is constrained by sensor occlusions, line-of-sight blind spots, and cellular communication latency (>100ms). Safe cooperative platooning requires deterministic, real-time wireless telemetry directly between vehicle nodes without dependency on external infrastructure.",
+      approach:
+        "Engineered dual-core ESP32 vehicle nodes executing an ESP-NOW peer-to-peer telemetry loop with sub-10ms packet dispatch. Coupled an MPU6050 6-DOF IMU, ultrasonic rangefinder, and GPS module with an embedded Time-To-Collision (TTC) safety supervisor controlling PWM motor drivers.",
+      architecture: [
+        "Telemetry Node: Dual-core ESP32 (FreeRTOS scheduler for parallel sensing & transmission)",
+        "Sensor Suite: MPU6050 IMU (inertial vectors) + Ultrasonic transceiver + GPS module",
+        "P2P Protocol: ESP-NOW 2.4 GHz low-latency connectionless packet broadcast",
+        "Control Engine: Time-To-Collision (TTC) algorithm with automated throttle/braking actuation",
+        "HIL Verification: Python telemetry logger & trajectory visualization harness",
+      ],
+      implementation: [
+        "Authored deterministic Embedded C firmware with FreeRTOS ring buffers for packet parsing",
+        "Formulated dynamic velocity-dependent safety distances to prevent rear-end collisions",
+        "Designed physical prototype chassis with dedicated motor driver isolation and regulated power delivery",
+        "Integrated Python-based visualization and testing suite for multi-scenario validation",
+      ],
+      results: [
+        "Validated cooperative braking and collision prevention across moving vehicle nodes",
+        "Maintained sub-10ms packet delivery across peer-to-peer wireless links",
+        "Authored paper accepted in International Journal of Emerging Trends in Engineering and Development (IJETED, May 2026)",
+      ],
+      status: "Physical Hardware Prototype Operational & Published",
+    },
   },
   {
     id: "fpga-image-deduplication-engine",
@@ -229,6 +271,30 @@ export const featuredProjects: Project[] = [
       "Vivado synthesis",
       "FPGA resource/latency optimization",
     ],
+    caseStudy: {
+      problem:
+        "Edge wildlife camera traps capture thousands of redundant, empty frames that overwhelm storage arrays and cellular backhaul bandwidth. Software-based deduplication consumes excessive power on remote battery installations, requiring dedicated, low-power RTL hardware acceleration.",
+      approach:
+        "Designed a high-throughput Verilog HDL pipeline that constructs 64-bit perceptual image signatures in hardware registers and performs clock-cycle deterministic Hamming-distance comparison against cached references.",
+      architecture: [
+        "Data Interface: Pipelined pixel-stream input buffer with clock synchronization",
+        "Signature Core: 64-bit gradient-based perceptual signature extraction block",
+        "Comparison Array: Parallel bitwise Hamming-distance comparator with configurable threshold",
+        "Control Logic: Single-cycle duplicate decision flag inhibiting redundant SD card writes",
+      ],
+      implementation: [
+        "Modeled structural and behavioral RTL logic entirely in Verilog HDL",
+        "Verified corner cases and timing transitions using ModelSim testbenches",
+        "Synthesized and targeted the logic architecture onto a Xilinx Artix-7 FPGA using Vivado",
+        "Optimized lookup table (LUT) and flip-flop footprints to minimize edge power draw",
+      ],
+      results: [
+        "Awarded First Prize (₹25,000) at Unplugged Hackathon, DJ Sanghvi College of Engineering",
+        "Achieved clock-cycle real-time deduplication with zero software CPU overhead",
+        "Verified complete timing closure and clean simulation traces",
+      ],
+      status: "Synthesized on Artix-7 FPGA & ModelSim Verified",
+    },
   },
   {
     id: "mobile-smart-home-automation",
@@ -249,6 +315,28 @@ export const featuredProjects: Project[] = [
       "Multi-channel relay isolation & driver circuitry",
       "Remote wireless state control & monitoring",
     ],
+    caseStudy: {
+      problem:
+        "Standard home electrical appliances require physical switch interaction and lack intelligent power control or state monitoring, while retrofit commercial solutions are proprietary and inflexible.",
+      approach:
+        "Built an optocoupler-isolated multi-channel relay module controlled by an ESP32 microcontroller with non-blocking wireless state management.",
+      architecture: [
+        "Controller: Dual-core ESP32 running custom non-blocking state firmware",
+        "Isolation: Optocoupler ICs providing galvanic isolation between 3.3V logic and AC mains",
+        "Switching: 4-channel high-current mechanical relays with flyback diode protection",
+        "Interface: Remote mobile control interface over wireless LAN",
+      ],
+      implementation: [
+        "Programmed Arduino C++ firmware with state-saving in flash memory",
+        "Designed physical hardware enclosure ensuring mains voltage creepage distances",
+        "Stress-tested continuous load switching across prolonged operating cycles",
+      ],
+      results: [
+        "Reliable zero-latency switching response across all connected electrical channels",
+        "Zero reported false triggers or relay latching failures",
+      ],
+      status: "Hardware Prototype Tested & Operational",
+    },
   },
 ];
 
@@ -273,6 +361,27 @@ export const otherProjects: Project[] = [
     description:
       "High-fidelity Indian traffic simulation platform built with MATLAB/Simulink and scenario design tools. Contributed to the National Winner Smart India Hackathon 2025 solution.",
     context: "Contributed to the National Winner Smart India Hackathon 2025 solution.",
+    caseStudy: {
+      problem:
+        "Standard traffic simulators assume strict lane adherence and homogeneous traffic, failing completely when applied to dense, heterogeneous, non-lane-based Indian road networks.",
+      approach:
+        "Engineered a digital twin platform combining RoadRunner high-fidelity 3D road models, MATLAB/Simulink vehicle dynamics, and AI scenario generation to replicate real Indian traffic environments.",
+      architecture: [
+        "Scenario Generator: RoadRunner + Driving Scenario Designer for realistic road geometry",
+        "Dynamics Core: MATLAB & Simulink vehicle dynamics and collision logic",
+        "AI Co-Pilot: Multi-LLM integration for dynamic incident simulation and traffic policy testing",
+      ],
+      implementation: [
+        "Calibrated mixed-vehicle interaction models (auto-rickshaws, two-wheelers, heavy vehicles)",
+        "Integrated Automated Driving Toolbox sensor models for ADAS evaluation",
+        "Demonstrated live dynamic simulation at the national finals",
+      ],
+      results: [
+        "National Winner — Smart India Hackathon 2025 (AICTE × MathWorks, ₹1,50,000 cash prize)",
+        "Selected as 1st prize winner out of 50,000+ participating engineering teams",
+      ],
+      status: "National Champion — SIH 2025",
+    },
   },
   {
     id: "gaganix-space-weather",
@@ -294,6 +403,28 @@ export const otherProjects: Project[] = [
       "Engineered machine learning pipelines for multi-horizon radiation forecasting using 11 years of satellite radiation and solar-wind datasets, encompassing feature engineering, preprocessing, and model training.",
     context:
       "Worked with 11 years of satellite radiation and solar-wind datasets including preprocessing, feature engineering, model training and multi-horizon forecasting.",
+    caseStudy: {
+      problem:
+        "Solar energetic particle events and coronal mass ejections can degrade satellite electronics and endanger aerospace missions. Early predictive warnings require parsing decades of astrophysical data.",
+      approach:
+        "Built an end-to-end predictive machine learning pipeline ingesting 11 years of NASA/satellite CDF telemetry to forecast radiation flux horizons.",
+      architecture: [
+        "Ingestion: CDFlib parser reading multi-dimensional satellite radiation logs",
+        "Feature Pipeline: Solar wind speed, magnetic field IMF vectors, and proton flux metrics",
+        "Model Architecture: Multi-horizon PyTorch regression models with cross-validation",
+        "Dashboard: Streamlit real-time interactive telemetry visualization",
+      ],
+      implementation: [
+        "Handled missing values and sensor drift across 11 years of temporal telemetry",
+        "Trained and compared deep learning and gradient boosted models for multi-hour forecasting",
+        "Optimized inference time for edge and operations center deployment",
+      ],
+      results: [
+        "Accurate predictive horizons for high-energy solar radiation events",
+        "Clean interactive dashboard interface for mission controllers",
+      ],
+      status: "Validated on 11-Year Satellite Dataset",
+    },
   },
   {
     id: "water-rocket-parametric-optimization",
@@ -305,6 +436,27 @@ export const otherProjects: Project[] = [
     description:
       "Developed a simulation-based optimization workflow for water-rocket design by analyzing parameters such as water-fill ratio and launch pressure using MATLAB, Simulink and OpenRocket.",
     context: "Connected to research work at Bharat Space Education Research Centre.",
+    caseStudy: {
+      problem:
+        "Water rocket apogee altitude is determined by non-linear pneumatic expansion, transient water mass loss, and variable aerodynamic drag. Finding optimal launch parameters manually requires prohibitive trial-and-error.",
+      approach:
+        "Formulated automated mathematical simulation sweeps linking MATLAB differential equation solvers with OpenRocket trajectory aerodynamics.",
+      architecture: [
+        "Thermodynamic Model: Isentropic air expansion and water mass ejection dynamics in MATLAB",
+        "Flight Simulator: OpenRocket 6-DOF trajectory and aerodynamic drag simulation",
+        "Optimization Engine: Automated parameter sweep evaluating fill ratios (20%–60%) and pressures",
+      ],
+      implementation: [
+        "Developed coupled differential equations modeling pressure decay and thrust profile",
+        "Scripted automated multi-run scenario batches across varied atmospheric conditions",
+        "Correlated simulation predictions with experimental water-rocket launch trials",
+      ],
+      results: [
+        "Identified precise optimal water-fill fraction for maximum altitude efficiency",
+        "Completed as primary research deliverable during winter internship at Bharat Space Education Research Centre",
+      ],
+      status: "Completed Research Internship Deliverable",
+    },
   },
 ];
 
