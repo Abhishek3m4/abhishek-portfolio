@@ -61,6 +61,14 @@ export default function ExperienceSection() {
     return () => ctx.revert();
   }, []);
 
+  const handleNext = () => {
+    setActiveIndex((prev) => Math.min(prev + 1, engineeringExperiences.length - 1));
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
     <section
       id="experience"
@@ -68,19 +76,42 @@ export default function ExperienceSection() {
       className="relative bg-[#0a0d12] border-b border-[#242e3d] overflow-hidden"
     >
       <div className="w-full min-h-screen flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-6 lg:px-12">
-        {/* Top Header */}
+        {/* Top Header & Navigation Controls */}
         <div className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#242e3d] z-20">
           <div>
             <div className="flex items-center gap-2 font-tech text-xs text-cyan-400 tracking-widest uppercase mb-1">
-              <span>CAREER // AEROSPACE & FIRMWARE</span>
+              <span>CAREER // AEROSPACE & FIRMWARE ROLES</span>
             </div>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
               Engineering Experience
             </h2>
           </div>
 
-          <div className="font-tech text-xs text-slate-400">
-            CHRONOLOGICAL TIMELINE // 2025 ➔ PRESENT
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+                className="w-8 h-8 rounded-lg bg-[#171d27] border border-[#242e3d] text-slate-300 hover:text-white hover:border-cyan-400 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Previous experience"
+              >
+                ←
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={activeIndex === engineeringExperiences.length - 1}
+                className="w-8 h-8 rounded-lg bg-[#171d27] border border-[#242e3d] text-slate-300 hover:text-white hover:border-cyan-400 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-colors cursor-pointer"
+                aria-label="Next experience"
+              >
+                →
+              </button>
+            </div>
+
+            <div className="font-tech text-xs text-slate-400">
+              0{activeIndex + 1} / 0{engineeringExperiences.length} // 2025 ➔ PRESENT
+            </div>
           </div>
         </div>
 
@@ -106,7 +137,7 @@ export default function ExperienceSection() {
                 return (
                   <div
                     key={exp.organization}
-                    className={`shrink-0 w-[88vw] sm:w-[75vw] md:w-[60vw] lg:w-[48vw] xl:w-[42vw] flex flex-col items-center ${offsetClass}`}
+                    className={`shrink-0 w-[90vw] sm:w-[78vw] md:w-[62vw] lg:w-[50vw] xl:w-[44vw] flex flex-col items-center ${offsetClass}`}
                   >
                     {/* Hanging Node, Year Chip & Stem (Desktop) */}
                     <div className="hidden md:flex flex-col items-center mb-0 relative z-20">
@@ -165,7 +196,7 @@ export default function ExperienceSection() {
                           </h3>
                         </div>
 
-                        <span className="font-tech text-xs px-2.5 py-1 rounded bg-[#10151d] text-slate-300 border border-[#242e3d] shrink-0">
+                        <span className="font-tech text-xs px-2.5 py-1 rounded bg-[#10151d] text-cyan-300 border border-cyan-500/30 shrink-0 font-semibold">
                           {exp.role}
                         </span>
                       </div>
@@ -183,7 +214,7 @@ export default function ExperienceSection() {
                             alt={exp.organization}
                             aspectRatio="aspect-16/9"
                             label={`EXPERIENCE // ${exp.year}`}
-                            tag="AVIONICS"
+                            tag="AVIONICS / AEROSPACE"
                           />
                         </div>
                       )}

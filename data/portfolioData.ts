@@ -596,5 +596,93 @@ export const leadershipActivities: LeadershipActivity[] = [
   },
 ];
 
+export interface SignalFlowNode {
+  step: string;
+  label: string;
+  sub: string;
+  code: string;
+  description: string;
+  specs: string[];
+  protocols: string[];
+  accent: string;
+  dot: string;
+}
+
+export const hardwareSignalFlowNodes: SignalFlowNode[] = [
+  {
+    step: "01",
+    label: "Microcontroller Core",
+    sub: "ESP32 Core / FreeRTOS",
+    code: "CORE_MCU",
+    description:
+      "Dual Xtensa LX6 cores @ 240MHz executing pre-emptive FreeRTOS tasks with microsecond deterministic interrupt servicing.",
+    specs: ["240 MHz Dual Core", "520 KB SRAM", "FreeRTOS Preemption", "<15µs ISR Latency"],
+    protocols: ["Hardware Timers", "Ring Buffers", "FreeRTOS Queues"],
+    accent: "border-cyan-500/40 text-cyan-400 bg-cyan-950/30",
+    dot: "bg-cyan-400",
+  },
+  {
+    step: "02",
+    label: "Sensor Acquisition",
+    sub: "MPU6050 • Ultrasonic • GPS",
+    code: "SENS_ACQ",
+    description:
+      "Multi-sensor telemetry bus polling 6-DOF IMU dynamics, time-of-flight ultrasonic echo, and satellite fix in non-blocking loops.",
+    specs: ["1 kHz IMU Sampling", "1cm Ultrasonic Precision", "10Hz NMEA GPS Fix"],
+    protocols: ["I²C @ 400kHz", "UART 115200 baud", "GPIO Echo Pulses"],
+    accent: "border-sky-500/40 text-sky-400 bg-sky-950/30",
+    dot: "bg-sky-400",
+  },
+  {
+    step: "03",
+    label: "Communication Bus",
+    sub: "ESP-NOW • CAN • SPI • UART",
+    code: "BUS_LINK",
+    description:
+      "Deterministic low-latency peer-to-peer telemetry loop broadcasting collision vectors without cellular network infrastructure.",
+    specs: ["<10ms P2P Packet Dispatch", "2.4GHz Direct PHY", "Zero-Handshake Broadcast"],
+    protocols: ["ESP-NOW P2P", "CAN 2.0B / SPI", "UART Telemetry"],
+    accent: "border-indigo-500/40 text-indigo-400 bg-indigo-950/30",
+    dot: "bg-indigo-400",
+  },
+  {
+    step: "04",
+    label: "Control & Safety",
+    sub: "TTC Safety • PID / PWM",
+    code: "CTRL_LOOP",
+    description:
+      "Embedded Time-To-Collision (TTC) supervisor adjusting throttle and triggering regenerative emergency braking in real-time.",
+    specs: ["Dynamic Safety Thresholds", "16-bit PWM Resolution", "Closed-Loop PID Response"],
+    protocols: ["High-Frequency PWM", "H-Bridge Motor Drive", "Optocoupler Isolation"],
+    accent: "border-emerald-500/40 text-emerald-400 bg-emerald-950/30",
+    dot: "bg-emerald-400",
+  },
+  {
+    step: "05",
+    label: "Edge Acceleration",
+    sub: "Artix-7 FPGA / Edge RTL",
+    code: "EDGE_PROC",
+    description:
+      "Hardware pipeline computing 64-bit perceptual image hashes and bitwise Hamming distance in parallel dedicated logic slices.",
+    specs: ["Xilinx Artix-7 100T", "Single Clock Cycle Matching", "Zero Host CPU Overhead"],
+    protocols: ["Verilog HDL Pipeline", "ModelSim Testbench", "Xilinx Vivado Synthesis"],
+    accent: "border-amber-500/40 text-amber-400 bg-amber-950/30",
+    dot: "bg-amber-400",
+  },
+  {
+    step: "06",
+    label: "Physical Deployment",
+    sub: "Autonomous V2V Platooning",
+    code: "PHYS_SYS",
+    description:
+      "Operational physical cyber-systems tested on custom chassis and validated with high-fidelity digital twin simulation environments.",
+    specs: ["SIH 2025 National 1st Prize", "IJETED Published Research", "Operational Field Chassis"],
+    protocols: ["MATLAB / Simulink Twin", "RoadRunner 3D Co-Sim", "Physical Testbed"],
+    accent: "border-teal-500/40 text-teal-400 bg-teal-950/30",
+    dot: "bg-teal-400",
+  },
+];
+
 export const otherProjects: Project[] = [];
+
 

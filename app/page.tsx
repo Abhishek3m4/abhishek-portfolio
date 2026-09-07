@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutSection from "@/components/AboutSection";
+import HardwarePipelineSection from "@/components/HardwarePipelineSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import ExperienceSection from "@/components/ExperienceSection";
 import EducationSection from "@/components/EducationSection";
@@ -26,6 +27,9 @@ export default function Home() {
 
         {/* Narrative & 3 Engineering Pillars */}
         <AboutSection />
+
+        {/* Cyber-Physical Hardware Signal Flow Pipeline */}
+        <HardwarePipelineSection />
 
         {/* Featured Projects: Horizontal Pinned Hanging Rail (5 Flagship Projects) */}
         <FeaturedProjects />

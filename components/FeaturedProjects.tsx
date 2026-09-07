@@ -12,10 +12,19 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const PROJECT_CATEGORIES = [
+  { label: "ALL SYSTEMS", id: "all" },
+  { label: "DIGITAL TWIN", id: "twinx-digital-twin" },
+  { label: "V2V AUTONOMOUS", id: "v2v-autonomous-vehicle-control" },
+  { label: "FPGA / RTL", id: "fpga-image-deduplication-engine" },
+  { label: "SMART IOT", id: "mobile-smart-home-automation" },
+  { label: "AEROSPACE", id: "water-rocket-parametric-optimization" },
+];
+
 export default function FeaturedProjects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [activeFilter, setActiveFilter] = useState("all");
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -53,7 +62,6 @@ export default function FeaturedProjects() {
               featuredProjects.length - 1
             );
             setActiveIndex(idx);
-            setProgress(self.progress);
           },
         },
       });
@@ -66,6 +74,32 @@ export default function FeaturedProjects() {
     return () => ctx.revert();
   }, []);
 
+  const handleSelectFilter = (catId: string) => {
+    setActiveFilter(catId);
+    if (catId === "all") return;
+
+    const targetIdx = featuredProjects.findIndex((p) => p.id === catId);
+    if (targetIdx !== -1) {
+      setActiveIndex(targetIdx);
+      const track = trackRef.current;
+      if (track) {
+        const cardWidth = track.scrollWidth / featuredProjects.length;
+        track.scrollTo({
+          left: targetIdx * cardWidth,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => Math.min(prev + 1, featuredProjects.length - 1));
+  };
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => Math.max(prev - 1, 0));
+  };
+
   return (
     <section
       id="work"
@@ -74,34 +108,82 @@ export default function FeaturedProjects() {
     >
       {/* Container that stays pinned during GSAP scrub on desktop */}
       <div className="w-full min-h-screen flex flex-col justify-between py-8 sm:py-12 px-4 sm:px-6 lg:px-12">
-        {/* Top Header & Project Progress Indicator */}
-        <div className="max-w-7xl mx-auto w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#242e3d] z-20">
-          <div>
-            <div className="flex items-center gap-2 font-tech text-xs text-cyan-400 tracking-widest uppercase mb-1">
-              <span>WORK // FLAGSHIP SYSTEMS</span>
+        {/* Top Header, Filters & Navigation Controls */}
+        <div className="max-w-7xl mx-auto w-full space-y-4 pb-6 border-b border-[#242e3d] z-20">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div>
+              <div className="flex items-center gap-2 font-tech text-xs text-cyan-400 tracking-widest uppercase mb-1">
+                <span>WORK // FLAGSHIP HARDWARE & SOFTWARE</span>
+              </div>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
+                Selected Projects
+              </h2>
             </div>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black text-white uppercase tracking-tight">
-              Selected Projects
-            </h2>
+
+            {/* Progress Indicator & Buttons */}
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  disabled={activeIndex === 0}
+                  className="w-8 h-8 rounded-lg bg-[#171d27] border border-[#242e3d] text-slate-300 hover:text-white hover:border-cyan-400 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Previous project"
+                >
+                  ←
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={activeIndex === featuredProjects.length - 1}
+                  className="w-8 h-8 rounded-lg bg-[#171d27] border border-[#242e3d] text-slate-300 hover:text-white hover:border-cyan-400 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-colors cursor-pointer"
+                  aria-label="Next project"
+                >
+                  →
+                </button>
+              </div>
+
+              <div className="flex items-center gap-3 font-tech text-xs text-slate-400">
+                <span className="font-display text-xl font-bold text-cyan-400">
+                  0{activeIndex + 1}
+                </span>
+                <div className="w-24 sm:w-36 h-[3px] bg-[#171d27] rounded-full overflow-hidden border border-[#242e3d]">
+                  <div
+                    className="h-full bg-cyan-400 transition-all duration-150 ease-out rounded-full"
+                    style={{
+                      width: `${Math.max(
+                        ((activeIndex + 1) / featuredProjects.length) * 100,
+                        15
+                      )}%`,
+                    }}
+                  />
+                </div>
+                <span className="text-slate-400">0{featuredProjects.length}</span>
+              </div>
+            </div>
           </div>
 
-          {/* Progress Indicator: 01 ━━━━━ 05 */}
-          <div className="flex items-center gap-3 font-tech text-xs text-slate-400">
-            <span className="font-display text-xl font-bold text-cyan-400">
-              0{activeIndex + 1}
-            </span>
-            <div className="w-28 sm:w-40 h-[3px] bg-[#171d27] rounded-full overflow-hidden border border-[#242e3d]">
-              <div
-                className="h-full bg-cyan-400 transition-all duration-75 ease-out rounded-full"
-                style={{
-                  width: `${Math.max(
-                    ((activeIndex + 1) / featuredProjects.length) * 100,
-                    15
-                  )}%`,
-                }}
-              />
-            </div>
-            <span className="text-slate-400">0{featuredProjects.length}</span>
+          {/* Quick Domain Filter Chips */}
+          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+            {PROJECT_CATEGORIES.map((cat) => {
+              const isSelected =
+                activeFilter === cat.id ||
+                (cat.id !== "all" && featuredProjects[activeIndex]?.id === cat.id);
+              return (
+                <button
+                  key={cat.id}
+                  type="button"
+                  onClick={() => handleSelectFilter(cat.id)}
+                  className={`px-3 py-1 rounded-full font-tech text-[11px] tracking-wider uppercase transition-colors cursor-pointer border ${
+                    isSelected
+                      ? "bg-cyan-950/80 text-cyan-300 border-cyan-500/60 font-semibold"
+                      : "bg-[#171d27] text-slate-400 border-[#242e3d] hover:border-[#3b495e] hover:text-slate-200"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -110,7 +192,6 @@ export default function FeaturedProjects() {
           {/* Continuous Horizontal Hanging Rail (Desktop) */}
           <div className="hidden md:block absolute top-16 left-0 right-0 z-10 pointer-events-none">
             <div className="w-full h-[2px] bg-[#242e3d] shadow-sm relative">
-              {/* Subtle line glow */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent" />
             </div>
           </div>
@@ -128,7 +209,7 @@ export default function FeaturedProjects() {
                 return (
                   <div
                     key={project.id}
-                    className={`shrink-0 w-[90vw] sm:w-[80vw] md:w-[65vw] lg:w-[58vw] xl:w-[52vw] flex flex-col items-center ${offsetClass}`}
+                    className={`shrink-0 w-[92vw] sm:w-[82vw] md:w-[68vw] lg:w-[60vw] xl:w-[54vw] flex flex-col items-center ${offsetClass}`}
                   >
                     {/* Hanging Node & Vertical Stem (Desktop) */}
                     <div className="hidden md:flex flex-col items-center mb-0 relative z-20">
@@ -160,7 +241,7 @@ export default function FeaturedProjects() {
                     <div
                       className="w-full rounded-2xl bg-[#171d27] border p-6 sm:p-8 lg:p-10 shadow-2xl transition-all duration-300 relative group"
                       style={{
-                        borderColor: isCurrent ? `${project.accentColor}70` : "#242e3d",
+                        borderColor: isCurrent ? `${project.accentColor}80` : "#242e3d",
                       }}
                     >
                       {/* Top Header: Number & Role */}
@@ -248,7 +329,7 @@ export default function FeaturedProjects() {
                               alt={project.title}
                               aspectRatio="aspect-16/10"
                               label={`SYSTEM // ${project.id.toUpperCase()}`}
-                              tag="ARTIFACT"
+                              tag="VERIFIED ASSET"
                               slotHint={`public${project.image}`}
                             />
                           </div>
@@ -265,7 +346,7 @@ export default function FeaturedProjects() {
         {/* Bottom Hint */}
         <div className="hidden md:flex items-center justify-between font-tech text-[11px] text-slate-400 pt-3 border-t border-[#242e3d]/60">
           <span>VERTICAL SCROLL CONTROLS HORIZONTAL RAIL</span>
-          <span>PHYSICAL HANGING-CARD SYSTEM</span>
+          <span>PHYSICAL HANGING-CARD ARCHITECTURE</span>
         </div>
       </div>
 

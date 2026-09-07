@@ -14,7 +14,7 @@ export default function Navbar() {
       const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       setScrolled(winScroll > 20);
 
-      const sectionIds = ["home", "about", "work", "experience", "education", "contact"];
+      const sectionIds = ["home", "about", "pipeline", "work", "experience", "education", "contact"];
       for (const sectionId of sectionIds) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -33,6 +33,7 @@ export default function Navbar() {
 
   const navLinks = [
     { label: "HOME", href: "#home", id: "home" },
+    { label: "PIPELINE", href: "#pipeline", id: "pipeline" },
     { label: "WORK", href: "#work", id: "work" },
     { label: "EXPERIENCE", href: "#experience", id: "experience" },
     { label: "EDUCATION", href: "#education", id: "education" },
