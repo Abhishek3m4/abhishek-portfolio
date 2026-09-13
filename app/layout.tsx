@@ -49,11 +49,14 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Abhishek Ahirrao" }],
   creator: "Abhishek Ahirrao",
-  metadataBase: new URL("https://abhishekahirrao.tech"),
+  metadataBase: new URL("https://abhishekahirrao.vercel.app"),
+  alternates: {
+    canonical: "https://abhishekahirrao.vercel.app",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://abhishekahirrao.tech",
+    url: "https://abhishekahirrao.vercel.app",
     title: "Abhishek Ahirrao | Embedded Systems & Electronics Engineer",
     description:
       "Electronics & Telecommunication Engineering student specializing in Embedded Systems, Real-Time Firmware, RTL/FPGA Acceleration, and Autonomous Control Systems.",
@@ -68,7 +71,49 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Abhishek Ahirrao",
+  url: "https://abhishekahirrao.vercel.app",
+  jobTitle: "Electronics & Telecommunication Engineering Student",
+  description:
+    "Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research, focusing on Embedded Systems, Real-Time Firmware, and FPGA Digital Logic.",
+  alumniOf: {
+    "@type": "EducationalOrganization",
+    name: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Nashik",
+    addressRegion: "Maharashtra",
+    addressCountry: "India",
+  },
+  sameAs: [
+    "https://github.com/Abhishek3m4",
+    "https://www.linkedin.com/in/abhishek-ahirrao334",
+  ],
+  knowsAbout: [
+    "Embedded Systems",
+    "FreeRTOS",
+    "ESP32",
+    "Verilog HDL",
+    "Artix-7 FPGA",
+    "MATLAB",
+    "Simulink",
+    "Autonomous Vehicles",
+    "V2V Communication",
+  ],
 };
 
 export default function RootLayout({
@@ -81,6 +126,12 @@ export default function RootLayout({
       lang="en"
       className={`${fontDisplay.variable} ${fontBody.variable} ${fontTech.variable} h-full antialiased dark scroll-smooth`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-[#0a0d12] text-[#f2f4f7] font-sans antialiased selection:bg-cyan-950 selection:text-cyan-300">
         {children}
       </body>
