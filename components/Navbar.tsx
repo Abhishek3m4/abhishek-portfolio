@@ -14,7 +14,7 @@ export default function Navbar() {
       const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
       setScrolled(winScroll > 20);
 
-      const sectionIds = ["home", "work", "experience", "pipeline", "about", "education", "contact"];
+      const sectionIds = ["home", "work", "experience", "about", "education", "contact"];
       for (const sectionId of sectionIds) {
         const el = document.getElementById(sectionId);
         if (el) {
@@ -35,7 +35,6 @@ export default function Navbar() {
     { label: "HOME", href: "#home", id: "home" },
     { label: "WORK", href: "#work", id: "work" },
     { label: "EXPERIENCE", href: "#experience", id: "experience" },
-    { label: "PIPELINE", href: "#pipeline", id: "pipeline" },
     { label: "ABOUT", href: "#about", id: "about" },
     { label: "EDUCATION", href: "#education", id: "education" },
     { label: "CONTACT", href: "#contact", id: "contact" },
@@ -111,6 +110,17 @@ export default function Navbar() {
             aria-label="LinkedIn Profile"
           >
             <LinkedInIcon size={16} />
+          </a>
+
+          {/* Direct Resume Download Link */}
+          <a
+            href={personalInfo.resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Abhishek_Ahirrao_Resume.pdf"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-950/60 hover:bg-cyan-900/70 text-cyan-300 border border-cyan-500/40 font-tech text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95"
+          >
+            <span>RESUME</span>
           </a>
 
           {/* Mobile hamburger button */}

@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { featuredProjects, Project } from "@/data/portfolioData";
 import TechnicalImage from "@/components/TechnicalImage";
-import ProjectCaseStudyModal from "@/components/ProjectCaseStudyModal";
 import { GitHubIcon } from "@/components/icons";
 
 if (typeof window !== "undefined") {
@@ -22,7 +21,6 @@ const PROJECT_CATEGORIES = [
 ];
 
 export default function FeaturedProjects() {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeFilter, setActiveFilter] = useState("all");
 
@@ -292,30 +290,22 @@ export default function FeaturedProjects() {
                             ))}
                           </div>
 
-                          {/* Actions: Case Study & GitHub */}
+                          {/* Action: Direct GitHub Link */}
                           <div className="flex items-center gap-3 pt-3">
-                            <button
-                              type="button"
-                              onClick={() => setSelectedProject(project)}
-                              className="px-4 py-2.5 rounded-lg font-tech text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
-                              style={{
-                                backgroundColor: project.accentColor,
-                                color: "#0a0d12",
-                              }}
-                            >
-                              VIEW CASE STUDY
-                            </button>
-
                             {project.github && (
                               <a
                                 href={project.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg bg-[#10151d] hover:bg-[#202833] text-white border border-[#242e3d] font-tech text-xs transition-all"
-                                aria-label="View Source on GitHub"
+                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-tech text-xs font-bold uppercase tracking-wider transition-all shadow-md active:scale-95 cursor-pointer hover:brightness-110"
+                                style={{
+                                  backgroundColor: project.accentColor,
+                                  color: "#0a0d12",
+                                }}
+                                aria-label={`View ${project.title} on GitHub`}
                               >
-                                <GitHubIcon size={14} />
-                                <span>SOURCE</span>
+                                <GitHubIcon size={15} />
+                                <span>VIEW SOURCE / REPOSITORY</span>
                               </a>
                             )}
                           </div>
@@ -349,15 +339,6 @@ export default function FeaturedProjects() {
           <span>PHYSICAL HANGING-CARD ARCHITECTURE</span>
         </div>
       </div>
-
-      {/* Case Study Modal */}
-      {selectedProject && (
-        <ProjectCaseStudyModal
-          project={selectedProject}
-          isOpen={!!selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
     </section>
   );
 }

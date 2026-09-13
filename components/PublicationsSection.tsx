@@ -38,6 +38,10 @@ export default function PublicationsSection() {
                   <span className="font-tech text-xs px-2.5 py-0.5 rounded bg-[#10151d] text-cyan-300 border border-cyan-500/30 font-bold">
                     {pub.type.toUpperCase()}
                   </span>
+                  <span className="font-tech text-xs px-2.5 py-0.5 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/40 font-semibold flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    {pub.status?.toUpperCase() || "PUBLISHED"}
+                  </span>
                   <span className="font-tech text-xs text-slate-400">
                     {pub.date}
                   </span>

@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import ExperienceSection from "@/components/ExperienceSection";
-import HardwarePipelineSection from "@/components/HardwarePipelineSection";
 import AboutSection from "@/components/AboutSection";
 import EducationSection from "@/components/EducationSection";
 import SkillsSection from "@/components/SkillsSection";
@@ -31,10 +30,7 @@ export default function Home() {
         {/* 3. Engineering Experience: Horizontal Pinned Hanging Rail (Milestones) */}
         <ExperienceSection />
 
-        {/* 4. Cyber-Physical Hardware Signal Flow Pipeline */}
-        <HardwarePipelineSection />
-
-        {/* 5. Engineering Background, Portrait & Technical Pillars */}
+        {/* 4. Engineering Background, Portrait & Technical Pillars */}
         <AboutSection />
 
         {/* 6. Education: Vertical Hanging Milestone Spine */}

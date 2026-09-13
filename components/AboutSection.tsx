@@ -60,12 +60,16 @@ export default function AboutSection() {
           {/* Center & Right: Narrative & Engineering Pillars */}
           <div className="lg:col-span-8 space-y-6">
             <div className="rounded-2xl bg-[#171d27] border border-[#242e3d] p-6 sm:p-8 space-y-4 shadow-xl">
-              <p className="text-slate-200 text-sm sm:text-base leading-relaxed font-body">
-                I am an Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research, focusing on embedded systems, deterministic firmware, and hardware acceleration.
-              </p>
-              <p className="text-slate-300 text-sm sm:text-base leading-relaxed font-body">
-                Rather than relying solely on simulation models, I build and validate physical vehicle prototypes, custom sensor boards, and RTL digital logic. My experience spans Embedded C firmware, ESP32 FreeRTOS tasks, ESP-NOW wireless protocols, Verilog HDL synthesis on Artix-7 FPGAs, and MATLAB/Simulink dynamic modeling.
-              </p>
+              {personalInfo.aboutParagraphs.map((paragraph, i) => (
+                <p
+                  key={i}
+                  className={`text-sm sm:text-base leading-relaxed font-body ${
+                    i === 0 ? "text-slate-200 font-medium" : "text-slate-300"
+                  }`}
+                >
+                  {paragraph}
+                </p>
+              ))}
             </div>
 
             {/* Core Engineering Pillars */}

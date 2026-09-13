@@ -113,7 +113,7 @@ export default function Hero3DContainer() {
             </div>
 
             <p className="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed font-body drop-shadow">
-              Engineering physical embedded systems, deterministic real-time firmware, and hardware acceleration from microcontroller buses to FPGA digital logic.
+              Building real-world embedded systems, low-latency telemetry, and FPGA digital logic at K.K. Wagh Institute of Engineering Education & Research (SPPU).
             </p>
 
             {/* Key Merit & Impact Badges Grid */}
@@ -159,7 +159,7 @@ export default function Hero3DContainer() {
                 <span className="font-display text-sm font-bold text-white block leading-tight">
                   2 Papers
                 </span>
-                <span className="font-tech text-[9px] text-slate-400 block">IJETED & ICITSC</span>
+                <span className="font-tech text-[9px] text-slate-400 block">Published</span>
               </div>
             </div>
 
@@ -174,10 +174,13 @@ export default function Hero3DContainer() {
               </a>
 
               <a
-                href="#pipeline"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-lg bg-[#171d27]/90 hover:bg-[#202833] text-cyan-300 border border-cyan-500/30 hover:border-cyan-400/60 font-tech text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all active:scale-95 cursor-pointer"
+                href={personalInfo.resumeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Abhishek_Ahirrao_Resume.pdf"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-lg bg-[#171d27]/90 hover:bg-[#202833] text-cyan-300 border border-cyan-500/40 hover:border-cyan-400/70 font-tech text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all active:scale-95 cursor-pointer"
               >
-                <span>SIGNAL PIPELINE</span>
+                <span>DOWNLOAD RESUME</span>
               </a>
 
               <a
