@@ -1,10 +1,10 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import AboutSection from "@/components/AboutSection";
-import HardwarePipelineSection from "@/components/HardwarePipelineSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
 import ExperienceSection from "@/components/ExperienceSection";
+import HardwarePipelineSection from "@/components/HardwarePipelineSection";
+import AboutSection from "@/components/AboutSection";
 import EducationSection from "@/components/EducationSection";
 import SkillsSection from "@/components/SkillsSection";
 import AchievementsSection from "@/components/AchievementsSection";
@@ -20,42 +20,42 @@ export default function Home() {
       {/* Sticky Top Navigation */}
       <Navbar />
 
-      {/* Main Content Sections */}
+      {/* Main Content Flow */}
       <main className="flex-1 w-full">
-        {/* Hero with authentic engineering typography & real portrait */}
+        {/* 1. Cinematic Scroll-Driven 3D Hero Sequence */}
         <Hero />
 
-        {/* Narrative & 3 Engineering Pillars */}
-        <AboutSection />
-
-        {/* Cyber-Physical Hardware Signal Flow Pipeline */}
-        <HardwarePipelineSection />
-
-        {/* Featured Projects: Horizontal Pinned Hanging Rail (5 Flagship Projects) */}
+        {/* 2. Featured Projects: Horizontal Pinned Hanging Rail (5 Flagship Systems) */}
         <FeaturedProjects />
 
-        {/* Experience: Horizontal Pinned Hanging Rail (Milestones) */}
+        {/* 3. Engineering Experience: Horizontal Pinned Hanging Rail (Milestones) */}
         <ExperienceSection />
 
-        {/* Education: Vertical Hanging Milestone Spine with Campus Asset */}
+        {/* 4. Cyber-Physical Hardware Signal Flow Pipeline */}
+        <HardwarePipelineSection />
+
+        {/* 5. Engineering Background, Portrait & Technical Pillars */}
+        <AboutSection />
+
+        {/* 6. Education: Vertical Hanging Milestone Spine */}
         <EducationSection />
 
-        {/* Technical Competencies Matrix */}
+        {/* 7. Technical Competencies Matrix */}
         <SkillsSection />
 
-        {/* Major Achievements & Competition Wins */}
+        {/* 8. Major Achievements & SIH 2025 Win */}
         <AchievementsSection />
 
-        {/* Scholarly Publications */}
+        {/* 9. Scholarly Publications */}
         <PublicationsSection />
 
-        {/* Continuous Learning & Professional Certifications */}
+        {/* 10. Continuous Learning & Professional Certifications */}
         <CertificationsSection />
 
-        {/* Leadership & Activities */}
+        {/* 11. Leadership & Space Club Activities */}
         <LeadershipSection />
 
-        {/* Direct Contact & Collaboration */}
+        {/* 12. Direct Contact & Collaboration */}
         <ContactSection />
       </main>
 
