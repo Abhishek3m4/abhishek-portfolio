@@ -49,11 +49,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Abhishek Ahirrao" }],
   creator: "Abhishek Ahirrao",
-  metadataBase: new URL("https://abhishekahirrao.dev"),
+  metadataBase: new URL("https://abhishekahirrao.tech"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://abhishekahirrao.dev",
+    url: "https://abhishekahirrao.tech",
     title: "Abhishek Ahirrao | Embedded Systems & Electronics Engineer",
     description:
       "Electronics & Telecommunication Engineering student specializing in Embedded Systems, Real-Time Firmware, RTL/FPGA Acceleration, and Autonomous Control Systems.",
