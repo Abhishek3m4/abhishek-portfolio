@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { personalInfo } from "@/data/portfolioData";
 import { ArrowDownIcon, TrophyIcon, CpuIcon, FpgaIcon, AwardIcon } from "@/components/icons";
 import { useHeroScroll } from "./useHeroScroll";
+import ViewCounter from "@/components/ViewCounter";
 
 // Dynamically import Hero3DScene with SSR disabled to guarantee zero hydration mismatch
 const DynamicHero3DScene = dynamic(() => import("./Hero3DScene"), {
@@ -97,6 +98,8 @@ export default function Hero3DContainer() {
               <span className="font-tech text-[11px] text-slate-400 hidden md:inline">
                 NASHIK, MH
               </span>
+              <span className="text-slate-600">•</span>
+              <ViewCounter variant="compact" />
             </div>
 
             <div className="space-y-2">

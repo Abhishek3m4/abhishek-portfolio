@@ -3,6 +3,7 @@
 import React from "react";
 import { personalInfo } from "@/data/portfolioData";
 import { TerminalIcon, ArrowDownIcon, GitHubIcon, LinkedInIcon } from "@/components/icons";
+import ViewCounter from "@/components/ViewCounter";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -63,6 +64,11 @@ export default function Footer() {
             <span>TOP</span>
           </button>
         </div>
+      </div>
+
+      {/* Online Visitor Telemetry & Profile Views Showcase */}
+      <div className="max-w-7xl mx-auto mt-8">
+        <ViewCounter variant="panel" />
       </div>
 
       <div className="max-w-7xl mx-auto mt-8 pt-6 border-t border-[#171d27] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2">
