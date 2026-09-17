@@ -106,8 +106,16 @@ export default function Hero3DContainer() {
               <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-white uppercase leading-[0.92] drop-shadow-md">
                 {personalInfo.name}
               </h1>
-              <h2 className="font-display text-lg sm:text-2xl text-cyan-300 font-semibold tracking-wide uppercase pt-1 flex items-center gap-2">
-                <span>{personalInfo.primaryTitle}</span>
+              <h2 className="font-display text-base sm:text-xl lg:text-2xl font-semibold tracking-wide uppercase pt-1 leading-snug">
+                <span className="text-white">E&TC Embedded Engineer</span>
+                <span className="text-cyan-500/70 mx-2">|</span>
+                <span className="text-amber-400">SIH&apos;25 National Hackathon Winner</span>
+                <span className="text-cyan-500/70 mx-2">|</span>
+                <span className="text-cyan-300">Autonomous Systems &amp; AI/ML</span>
+                <span className="text-cyan-500/70 mx-2">|</span>
+                <span className="text-emerald-400">Unplugged Hardware Hackathon Winner&apos;26</span>
+                <span className="text-cyan-500/70 mx-2">|</span>
+                <span className="text-slate-200">Innovator &amp; Builder</span>
               </h2>
             </div>
 
@@ -115,8 +123,8 @@ export default function Hero3DContainer() {
               {personalInfo.focus}
             </div>
 
-            <p className="text-slate-300 text-sm sm:text-base max-w-xl leading-relaxed font-body drop-shadow">
-              Building real-world embedded systems, low-latency telemetry, and FPGA digital logic at K.K. Wagh Institute of Engineering Education & Research (SPPU).
+            <p className="text-slate-300 text-sm sm:text-base max-w-2xl leading-relaxed font-body drop-shadow">
+              {personalInfo.shortDescription}
             </p>
 
             {/* Key Merit & Impact Badges Grid */}
@@ -129,7 +137,18 @@ export default function Hero3DContainer() {
                 <span className="font-display text-sm font-bold text-white block leading-tight">
                   1st Prize ₹1.5L
                 </span>
-                <span className="font-tech text-[9px] text-slate-400 block">Out of 50,000+</span>
+                <span className="font-tech text-[9px] text-slate-400 block">National Winner</span>
+              </div>
+
+              <div className="p-2.5 rounded-xl bg-[#10151d]/90 border border-emerald-500/30 backdrop-blur-sm">
+                <div className="flex items-center gap-1.5 text-emerald-400 font-tech text-[10px] font-bold uppercase mb-0.5">
+                  <TrophyIcon size={12} />
+                  <span>UNPLUGGED &apos;26</span>
+                </div>
+                <span className="font-display text-sm font-bold text-white block leading-tight">
+                  Winner (1st)
+                </span>
+                <span className="font-tech text-[9px] text-slate-400 block">Hardware &amp; FPGA</span>
               </div>
 
               <div className="p-2.5 rounded-xl bg-[#10151d]/90 border border-cyan-500/30 backdrop-blur-sm">
@@ -143,8 +162,8 @@ export default function Hero3DContainer() {
                 <span className="font-tech text-[9px] text-slate-400 block">Peak 9.00 SGPA</span>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-[#10151d]/90 border border-emerald-500/30 backdrop-blur-sm">
-                <div className="flex items-center gap-1.5 text-emerald-400 font-tech text-[10px] font-bold uppercase mb-0.5">
+              <div className="p-2.5 rounded-xl bg-[#10151d]/90 border border-indigo-500/30 backdrop-blur-sm">
+                <div className="flex items-center gap-1.5 text-indigo-400 font-tech text-[10px] font-bold uppercase mb-0.5">
                   <CpuIcon size={12} />
                   <span>SPACE CLUB</span>
                 </div>
@@ -152,17 +171,6 @@ export default function Hero3DContainer() {
                   Avionics Lead
                 </span>
                 <span className="font-tech text-[9px] text-slate-400 block">Team Antariiksh</span>
-              </div>
-
-              <div className="p-2.5 rounded-xl bg-[#10151d]/90 border border-indigo-500/30 backdrop-blur-sm">
-                <div className="flex items-center gap-1.5 text-indigo-400 font-tech text-[10px] font-bold uppercase mb-0.5">
-                  <FpgaIcon size={12} />
-                  <span>RESEARCH</span>
-                </div>
-                <span className="font-display text-sm font-bold text-white block leading-tight">
-                  2 Papers
-                </span>
-                <span className="font-tech text-[9px] text-slate-400 block">Published</span>
               </div>
             </div>
 

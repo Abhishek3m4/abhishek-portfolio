@@ -85,10 +85,20 @@ export interface LeadershipActivity {
 
 export const personalInfo = {
   name: "Abhishek Ahirrao",
-  primaryTitle: "Electronics & Telecommunication Engineering Student",
-  focus: "Embedded Systems • Simulation • FPGA • Autonomous Systems",
+  primaryTitle:
+    "E&TC Embedded Engineer | SIH'25 National Hackathon Winner | Autonomous Systems & AI/ML | Unplugged Hardware Hackathon Winner'26 | Innovator & Builder",
+  titleSegments: [
+    "E&TC Embedded Engineer",
+    "SIH'25 National Hackathon Winner",
+    "Autonomous Systems & AI/ML",
+    "Unplugged Hardware Hackathon Winner'26",
+    "Innovator & Builder",
+  ],
+  focus: "Embedded Systems • Autonomous Systems • AI/ML • VLSI/FPGA",
+  shortDescription:
+    "I’m an E&TC engineer focused on embedded systems, autonomous technology, and AI/ML. A SIH’25 National Hackathon Winner and Unplugged Hardware Hackathon Winner’26, I build practical engineering solutions through hands-on projects, research, and experimentation. My work spans embedded systems, VLSI, FPGA, intelligent vehicles, and real-world problem solving—turning ideas into functional technology.",
   secondaryDescription:
-    "Electronics & Telecommunication Engineering student focused on Embedded Systems, Real-Time Firmware, and Hardware–Software Integration.",
+    "I’m an E&TC engineer focused on embedded systems, autonomous technology, and AI/ML. A SIH’25 National Hackathon Winner and Unplugged Hardware Hackathon Winner’26, I build practical engineering solutions through hands-on projects, research, and experimentation. My work spans embedded systems, VLSI, FPGA, intelligent vehicles, and real-world problem solving—turning ideas into functional technology.",
   college: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
   location: "Nashik, Maharashtra, India",
   profileImage: "/images/profile/abhishek.jpeg",
@@ -101,7 +111,7 @@ export const personalInfo = {
     highestSgpa: "9.00 / 10",
   },
   aboutParagraphs: [
-    "I am an Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research (SPPU), passionate about embedded systems, real-time firmware, and FPGA digital design.",
+    "I’m an E&TC engineer focused on embedded systems, autonomous technology, and AI/ML. A SIH’25 National Hackathon Winner and Unplugged Hardware Hackathon Winner’26, I build practical engineering solutions through hands-on projects, research, and experimentation. My work spans embedded systems, VLSI, FPGA, intelligent vehicles, and real-world problem solving—turning ideas into functional technology.",
     "My hands-on work focuses on turning hardware and mathematical models into working systems — from programming dual-core ESP32 microcontrollers with FreeRTOS and low-latency ESP-NOW wireless communication to synthesizing digital logic on Xilinx Artix-7 FPGAs and simulating dynamic control systems in MATLAB/Simulink.",
   ],
   socials: {
@@ -313,12 +323,12 @@ export const achievements: Achievement[] = [
     year: "2025",
   },
   {
-    title: "First Prize — Unplugged Hackathon",
+    title: "First Prize — Unplugged Hardware Hackathon 2026",
     organizer: "DJ Sanghvi College of Engineering",
     award: "₹25,000 Cash Prize",
     solution: "Real-Time Image Deduplication Engine on Artix-7 FPGA",
     role: "Team Lead & RTL Developer",
-    badge: "Champion",
+    badge: "Winner '26",
     year: "2026",
   },
 ];

@@ -29,20 +29,34 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const siteTitle =
+  "E&TC Embedded Engineer | SIH'25 National Hackathon Winner | Autonomous Systems & AI/ML | Unplugged Hardware Hackathon Winner'26 | Innovator & Builder";
+
+const fullTitle = `Abhishek Ahirrao | ${siteTitle}`;
+
+const siteDescription =
+  "I’m an E&TC engineer focused on embedded systems, autonomous technology, and AI/ML. A SIH’25 National Hackathon Winner and Unplugged Hardware Hackathon Winner’26, I build practical engineering solutions through hands-on projects, research, and experimentation. My work spans embedded systems, VLSI, FPGA, intelligent vehicles, and real-world problem solving—turning ideas into functional technology.";
+
 export const metadata: Metadata = {
-  title: "Abhishek Ahirrao | Embedded Systems & Electronics Engineer",
-  description:
-    "Electronics & Telecommunication Engineering student specializing in Embedded Systems, Real-Time Firmware, RTL/FPGA Acceleration, and Autonomous Control Systems.",
+  title: fullTitle,
+  description: siteDescription,
   keywords: [
     "Abhishek Ahirrao",
+    "E&TC Embedded Engineer",
+    "SIH'25 National Hackathon Winner",
+    "Smart India Hackathon Winner 2025",
+    "Unplugged Hardware Hackathon Winner'26",
+    "Autonomous Systems & AI/ML",
+    "Innovator & Builder",
     "Embedded Systems",
     "Electronics Engineering",
     "ENTC",
-    "ESP32",
+    "VLSI",
     "FPGA",
+    "ESP32",
     "Verilog HDL",
     "Real-Time Systems",
-    "V2V Autonomous Vehicle Control",
+    "Intelligent Vehicles",
     "TwinX Digital Twin",
     "MATLAB Simulink",
     "Hardware-Software Integration",
@@ -57,16 +71,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://abhishekahirrao.tech",
-    title: "Abhishek Ahirrao | Embedded Systems & Electronics Engineer",
-    description:
-      "Electronics & Telecommunication Engineering student specializing in Embedded Systems, Real-Time Firmware, RTL/FPGA Acceleration, and Autonomous Control Systems.",
+    title: fullTitle,
+    description: siteDescription,
     siteName: "Abhishek Ahirrao Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abhishek Ahirrao | Embedded Systems & Electronics Engineer",
-    description:
-      "Electronics & Telecommunication Engineering student specializing in Embedded Systems, Real-Time Firmware, RTL/FPGA Acceleration, and Autonomous Control Systems.",
+    title: fullTitle,
+    description: siteDescription,
   },
   robots: {
     index: true,
@@ -83,36 +95,55 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Abhishek Ahirrao",
-  url: "https://abhishekahirrao.tech",
-  jobTitle: "Electronics & Telecommunication Engineering Student",
-  description:
-    "Electronics & Telecommunication Engineering student at K.K. Wagh Institute of Engineering Education & Research, focusing on Embedded Systems, Real-Time Firmware, and FPGA Digital Logic.",
-  alumniOf: {
-    "@type": "EducationalOrganization",
-    name: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
-  },
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Nashik",
-    addressRegion: "Maharashtra",
-    addressCountry: "India",
-  },
-  sameAs: [
-    "https://github.com/Abhishek3m4",
-    "https://www.linkedin.com/in/abhishek-ahirrao334",
-  ],
-  knowsAbout: [
-    "Embedded Systems",
-    "FreeRTOS",
-    "ESP32",
-    "Verilog HDL",
-    "Artix-7 FPGA",
-    "MATLAB",
-    "Simulink",
-    "Autonomous Vehicles",
-    "V2V Communication",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://abhishekahirrao.tech/#person",
+      name: "Abhishek Ahirrao",
+      url: "https://abhishekahirrao.tech",
+      jobTitle:
+        "E&TC Embedded Engineer | SIH'25 National Hackathon Winner | Autonomous Systems & AI/ML | Unplugged Hardware Hackathon Winner'26 | Innovator & Builder",
+      description: siteDescription,
+      alumniOf: {
+        "@type": "EducationalOrganization",
+        name: "K.K. Wagh Institute of Engineering Education & Research, Nashik",
+      },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Nashik",
+        addressRegion: "Maharashtra",
+        addressCountry: "India",
+      },
+      sameAs: [
+        "https://github.com/Abhishek3m4",
+        "https://www.linkedin.com/in/abhishek-ahirrao334",
+      ],
+      knowsAbout: [
+        "Embedded Systems",
+        "Autonomous Systems",
+        "AI/ML",
+        "VLSI",
+        "FPGA",
+        "FreeRTOS",
+        "ESP32",
+        "Verilog HDL",
+        "Artix-7 FPGA",
+        "MATLAB",
+        "Simulink",
+        "Intelligent Vehicles",
+        "V2V Communication",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://abhishekahirrao.tech/#website",
+      url: "https://abhishekahirrao.tech",
+      name: fullTitle,
+      description: siteDescription,
+      publisher: {
+        "@id": "https://abhishekahirrao.tech/#person",
+      },
+    },
   ],
 };
 

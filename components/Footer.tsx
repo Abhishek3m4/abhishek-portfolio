@@ -21,7 +21,7 @@ export default function Footer() {
             <span className="text-slate-600">/</span>
             <span className="text-cyan-400 text-xs">PORTFOLIO</span>
           </div>
-          <p className="text-xs text-slate-500 font-body">
+          <p className="text-xs text-slate-500 font-body max-w-xl leading-relaxed">
             {personalInfo.primaryTitle} • {personalInfo.college}
           </p>
         </div>
